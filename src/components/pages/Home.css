@@ -1,0 +1,19 @@
+body{
+    margin: 0;
+    border: 0;
+    overflow: auto;
+}
+
+
+.creditos{
+    font-size: 10px;
+    display: flex;
+    justify-content: center;
+    bottom: 0;
+    color: bisque;
+    position: absolute;
+}
+
+.stars-container{
+    position: absolute;
+}
