@@ -1,5 +1,5 @@
 import {Mesh,Clock,MeshStandardMaterial,Color, WebGLRenderer, Scene, SphereGeometry, BackSide } from 'three'
-import { colorTextureStar,colorTextureScene,colorTexture,cloudTexture,colorTextureMercury,colorTextureVenus,colorTextureMarte,colorTextureJupiter,colorTextureSaturno,colorTextureUrano, colorTextureNeptuno } from '../../constants/Texturas.js'
+import { colorTextureStar,colorTextureScene,colorTexture,cloudTexture,colorTextureMercury,colorTextureVenus,colorTextureMarte,colorTextureJupiter,colorTextureSaturno,colorTextureUrano, colorTextureNeptuno, colorTextureSol } from '../../constants/Texturas.js'
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls"
 import './Home.css'
 import {CreatePlanet} from "../../helpers/CreatePlanet.js"
@@ -18,7 +18,7 @@ const Home = () =>{
     const orbitsRef = useRef([]);
     const rendererRef = useRef(null);
     const scene = new Scene()
-    const camara = CreateCamera()
+    const camara = CreateCamera({x:0, y:80, z:300})
     const naveRef = useRef([])
     
     useEffect(()=>{
@@ -49,7 +49,7 @@ const Home = () =>{
         scene.add(cuboScene)
 
         
-        const light = PointLightScene(scene)
+        const light = PointLightScene(scene,0xF9BB00, colorTextureSol)
         
         camara.lookAt(0,0,0) //camara mira a la sphera
 
@@ -119,7 +119,7 @@ const Home = () =>{
         
 
 
-        const objNave = CreateNaveEspacial(scene)
+        const objNave = CreateNaveEspacial(scene, {x:0,y:20,z:200})
         naveRef.current.push(objNave)
         console.log(naveRef)
 

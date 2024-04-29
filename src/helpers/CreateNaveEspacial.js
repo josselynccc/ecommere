@@ -3,10 +3,9 @@ import { Mesh, MeshBasicMaterial, Group,PointLight, SphereGeometry } from 'three
 import nave from '../assets/nave_espacial..glb'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
-export const CreateNaveEspacial = (scene) =>{
+export const CreateNaveEspacial = (scene, positions) =>{
     const groupnave = new Group()
     const loader = new GLTFLoader()
-    let positions = { x: 0, y: 30, z: 200 }
     let naveEspacial
 
     const keydown = (event) => {

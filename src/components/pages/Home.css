@@ -17,3 +17,28 @@ body{
 .stars-container{
     position: absolute;
 }
+
+.fecha{
+    top: 1em;
+    padding-left: 1em;
+    padding-right: 1em;
+    position: absolute;
+    background: radial-gradient(ellipse at center,  #0a2e38  0%, #000000 70%);
+    width: 100vw;
+    color: aquamarine;
+    color: #ffffff;
+    text-align: center;
+    color: #daf6ff;
+    text-shadow: 0 0 20px rgba(10, 175, 230, 1),  0 0 20px rgba(10, 175, 230, 0);
+}
+
+.date{
+    font-family: 'Share Tech Mono', monospace;
+    letter-spacing: 0.05em;
+    font-size: 24px;
+}
+.time{
+    font-family: 'Share Tech Mono', monospace;
+    letter-spacing: 0.05em;
+    font-size: 24px;
+}

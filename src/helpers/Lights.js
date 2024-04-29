@@ -1,6 +1,6 @@
 import {PointLight, AmbientLight, MeshBasicMaterial } from 'three'
 import {Mesh, SphereGeometry} from 'three'
-import { colorTextureSol} from '../constants/Texturas'
+
 
 
 export const AmbientLightScene = (scene) => {
@@ -9,12 +9,12 @@ export const AmbientLightScene = (scene) => {
     return ambientLight
 }
 
-export const PointLightScene = (scene) => {
+export const PointLightScene = (scene,colorp, colorTexture) => {
     const light1 = new PointLight( 0xF9BB00, 20000 , 1000000);
     light1.castShadow = true
     light1.position.set(0,0,0)
     light1.decay = 2;
-	light1.add( new Mesh( new SphereGeometry( 16, 60 ), new MeshBasicMaterial( {color:0xF9BB00 , map: colorTextureSol, } ) ) );
+	light1.add( new Mesh( new SphereGeometry( 16, 60 ), new MeshBasicMaterial( {color:colorp , map: colorTexture, } ) ) );
     scene.add( light1 )
 
     return light1

@@ -13,6 +13,7 @@ import urano from "../assets/urano.png"
 import neptuno from "../assets/neptuno.png"
 import star from "../assets/star.png"
 import mercuryalpha from "../assets/mercurioalpha.png"
+import luna from "../assets/moon.png"
 
 const textureLoader = new TextureLoader()
 export const colorTextureScene = textureLoader.load(sceneImg)
@@ -28,3 +29,4 @@ export const colorTextureUrano = textureLoader.load(urano)
 export const colorTextureNeptuno = textureLoader.load(neptuno)
 export const colorTextureStar = textureLoader.load(star)
 export const colorTextureMercuryAlpha = textureLoader.load(mercuryalpha)
+export const colorTextureLuna = textureLoader.load(luna)
