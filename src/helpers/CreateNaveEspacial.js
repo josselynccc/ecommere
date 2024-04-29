@@ -6,7 +6,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 export const CreateNaveEspacial = (scene) =>{
     const groupnave = new Group()
     const loader = new GLTFLoader()
-    let positions = { x: 0, y: 80, z: 200 }
+    let positions = { x: 0, y: 30, z: 200 }
     let naveEspacial
 
     const keydown = (event) => {
@@ -57,16 +57,23 @@ export const CreateNaveEspacial = (scene) =>{
         naveEspacial.rotation.x = -Math.PI/2
         naveEspacial.rotation.y = -Math.PI/2
 
-        const light = new PointLight(0xF9BB00, 2, 100); // Color amarillo
-        light.castShadow = true;
-        light.decay = 2;
-        light.add(new Mesh(new SphereGeometry(1, 60), new MeshBasicMaterial({ color: 0xF9BB00 }))); // Utilizar la misma textura del sol
-        
-        
+        const light1 = new PointLight(0xF9BB00, 2, 100); // Color amarillo
+        light1.castShadow = true;
+        light1.decay = 2;
+        light1.add(new Mesh(new SphereGeometry(1, 60), new MeshBasicMaterial({ color: 0xF9BB00 }))); // Utilizar la misma textura del sol
+        light1.position.x = -1
+
+        const light2 = new PointLight(0xF9BB00, 2, 100); // Color amarillo
+        light2.castShadow = true;
+        light2.decay = 2;
+        light2.add(new Mesh(new SphereGeometry(1, 60), new MeshBasicMaterial({ color: 0xF9BB00 }))); // Utilizar la misma textura del sol
+        light2.position.x = 3
+
         groupnave.position.x = positions.x
         groupnave.position.y = positions.y
         groupnave.position.z = positions.z
-        groupnave.add(light)
+        groupnave.add(light2)
+        groupnave.add(light1)
         groupnave.add(naveEspacial)
         
         scene.add(groupnave)
@@ -75,5 +82,5 @@ export const CreateNaveEspacial = (scene) =>{
         
     })
     
-    
+    return groupnave
 }

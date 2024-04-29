@@ -12,15 +12,15 @@ import {PointLightStar,AmbientLightScene, PointLightScene } from '../../helpers/
 import {CreateOrbitPlanet} from '../../helpers/CreateOrbitaPlanet.js'
 import {CreateNaveEspacial} from '../../helpers/CreateNaveEspacial.js'
 import MainHeader from '../organism/MainHeader.jsx';
-
 const Home = () =>{
     
     const planetsRef = useRef([]);
     const orbitsRef = useRef([]);
     const rendererRef = useRef(null);
+    const scene = new Scene()
+    const camara = CreateCamera()
+    const naveRef = useRef([])
     
-
-
     useEffect(()=>{
 
         if (rendererRef.current) {
@@ -28,7 +28,6 @@ const Home = () =>{
         }
 
         //CREANDO LA ESCENA
-        const scene = new Scene()
         scene.background = new Color( 0x404040 );
 
         //LIGHT A LA ESCENA
@@ -39,7 +38,6 @@ const Home = () =>{
         const height = window.innerHeight;
 
         //CREANDO CAMARA
-        const camara = CreateCamera()
         scene.add(camara)
 
         //CREANDO FIGURAS
@@ -81,7 +79,7 @@ const Home = () =>{
             const orbitRef = CreateOrbitPlanet(scene, planet.afelio , planet.perihelio)
             orbitsRef.current.push(orbitRef)
         })
-
+        
         //STARS
         const dataStar = [
             { colorTextureStar: colorTextureStar, position: { x: 50, y: 5, z: 80 }  },
@@ -119,7 +117,12 @@ const Home = () =>{
         }
 
         
-        CreateNaveEspacial(scene)
+
+
+        const objNave = CreateNaveEspacial(scene)
+        naveRef.current.push(objNave)
+        console.log(naveRef)
+
 
 
         //ANIMATE
@@ -144,17 +147,19 @@ const Home = () =>{
                 planet.rotation.y += planetData.rotationSpeed * deltaTime * 0.5
                
             })
-            
+
             renderScene()
             requestAnimationFrame(animate)
-            
+        
         }
 
         animate()
         //FULLSCREEN
         const FullScreen = () => {HandleDoubleClick(renderer.domElement)}
         window.addEventListener('dblclick', FullScreen) 
-    
+        
+        
+       
         
         //REMOVER LA FUNCION AL DESMONTAR EL COMPONENTE
         return () =>{
@@ -162,15 +167,24 @@ const Home = () =>{
             renderer.dispose()
             document.body.removeChild(renderer.domElement)
         }
-       
+        
     },[])
     
-    
+
     return <>
-        <MainHeader></MainHeader>
-    
-        <div className='creditos'>&quot;Astronauta&quot; (https://skfb.ly/6GBvp) by Mora is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/). <br />
-        &quot;Nave Espacial/Spacecraft&quot; (https://skfb.ly/6wCFG) by MatiasG729 is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).</div>
+        {planetsRef.current && naveRef.current &&(
+            <MainHeader 
+                nave = {naveRef.current}
+                planet={planetsRef.current}
+                camara={camara}
+            />
+        )}
+        
+
+        <div className='creditos'>
+            &quot;Astronauta&quot; (https://skfb.ly/6GBvp) by Mora is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/). <br />
+            &quot;Nave Espacial/Spacecraft&quot; (https://skfb.ly/6wCFG) by MatiasG729 is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
+        </div>
     </>
 }
 

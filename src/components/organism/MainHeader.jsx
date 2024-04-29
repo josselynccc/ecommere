@@ -2,20 +2,24 @@ import Logo from '../molecules/mainHeader/Logo'
 import MainMenu from '../molecules/mainHeader/MainMenu'
 import AboutMe from '../molecules/mainHeader/AboutMe'
 import './header.css'
-import { useState } from 'react'
+import {  useState } from 'react'
 
-const MainHeader = () =>{
+const MainHeader = ({nave, planet,camara}) =>{
+    if(planet){
+        console.log(planet)
+    }
 
     const [isVisibleAboutMe, setIsVisibleAboutMe] = useState(true)
 
     const hideAboutMe = ()=>{
         setIsVisibleAboutMe(false)
     }
+    
     const VisibleAboutMe = ()=>{
         setIsVisibleAboutMe(true)
     }
 
-    console.log(isVisibleAboutMe)
+    
 
     return <>
         {/* <div className='mainHeader'> */}
@@ -24,10 +28,14 @@ const MainHeader = () =>{
                 <MainMenu 
                 hideAboutMe={hideAboutMe}
                 visibleAboutMe={VisibleAboutMe}
-                isVisibleAboutMe={isVisibleAboutMe}></MainMenu>
+                isVisibleAboutMe={isVisibleAboutMe}
+                nave = {nave}
+                camara = {camara}
+                planet = {planet}></MainMenu>
             </div>
-            <AboutMe isVisibleAboutMe={isVisibleAboutMe}></AboutMe>
-            
+            <div className={ isVisibleAboutMe ? 'aboutMe VisibleAboutMeContainer' : 'aboutMe OcultoAboutMeContainer'}>
+                <AboutMe></AboutMe>
+            </div>
         {/* </div> */}
     </>
 }

@@ -11,18 +11,17 @@ import git from '../../../assets/Skills/git.png'
 import sass from '../../../assets/Skills/sass.png'
 import mongo from '../../../assets/Skills/mongo.png'
 import LeterforLeter from '../../../helpers/LeterforLeter'
+import video from '../../../assets/Avatar-1-unscreen.gif'
 
-const AboutMe = ({isVisibleAboutMe}) => {
+const AboutMe = () => {
     const parrafoRef = useRef()
     useEffect(() => {
-        if (isVisibleAboutMe) {
-            LeterforLeter("¡Bienvenido a mi mundo digital! Soy Josselyn Cortez, una apasionada Frontend Developer con una visión creativa y una pasión por la construcción de experiencias web cautivadoras. En mi viaje por el desarrollo web, he combinado mi amor por el diseño con mi habilidad para codificar, creando sitios web que no solo son funcionales, sino también visualmente impactantes. Explora las habilidades y tecnologías que domino como Frontend Developer. Desde HTML, CSS y JavaScript hasta frameworks como React y Angular, estoy constantemente aprendiendo y perfeccionando mi oficio para ofrecer las mejores soluciones a mis clientes.", parrafoRef.current);
+            LeterforLeter("¡Bienvenido a mi mundo digital! Soy Josselyn Cortez, una apasionada Frontend Developer con una visión creativa y una pasión por la construcción de experiencias web cautivadoras. En mi viaje por el desarrollo web, he combinado mi amor por el diseño con mi habilidad para codificar, creando sitios web funcionales y visualmente atractivas. Explora las habilidades y tecnologías que domino como Frontend Developer. Desde HTML, CSS y JavaScript hasta frameworks como React y Angular, estoy constantemente aprendiendo y perfeccionando mi oficio para ofrecer las mejores soluciones a mis clientes.", parrafoRef.current);
           }
-          console.log(isVisibleAboutMe)
-    }, [isVisibleAboutMe]);
+          ,[])
 
     return (<>
-    <div className={ isVisibleAboutMe ? 'aboutMe VisibleAboutMeContainer' : 'aboutMe OcultoAboutMeContainer'}>
+    <div className='aboutMe'>
         <div className='AboutMeContainer' >
             {/* <div className='redesSociales'>
                 <img src={github} alt="" />
@@ -33,6 +32,9 @@ const AboutMe = ({isVisibleAboutMe}) => {
                 <img className='AboutMeContainerFoto' src={foto} alt="" />
                 <p className="parrafo" ref={parrafoRef}>
                 </p>
+                <div>
+                <img src={video} alt=""/>
+            </div>
             </div>
             <div className="redesSociales">
                 <div><img src={react} alt="" /> <p>REACT</p></div>
@@ -45,9 +47,9 @@ const AboutMe = ({isVisibleAboutMe}) => {
                 <div><img src={sass} alt="" /> <p>SASS</p></div>
                 <div><img src={mongo} alt="" /> <p>MONGODB</p></div>
             </div>
+            
         </div>
-
-    </div>
+        </div>
     </>
         
     );

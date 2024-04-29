@@ -91,7 +91,7 @@
     width: 100%;
     height: 100%;
 
-    margin-top: 8em;
+    margin-top: 1em;
     margin-bottom: 1em;
     display: flex;
     flex-direction: column;
@@ -159,7 +159,57 @@
     border-radius: 30px;
 }
 
+.Menu{
+    display: flex;
+    top: 6rem;
+    flex-direction: column;
+    gap: 1em;
+    flex-wrap: wrap;
+    font-size: 18px;
+    text-align: center;
+    padding-left:0.5em;
+    padding-right:0.5em;
+    list-style-type: none;
+}
 
+.Menu nav ul{
+    list-style-type: none;
+    display: flex;
+    gap: 2em;
+    flex-wrap: wrap;
+    font-size: 20px;
+}
+
+
+.miDiv p{
+    font-size: 18px;
+    color: aliceblue;
+    padding-right: 0.5em;
+    padding-left: 0.5em;
+
+}
+
+.miDiv {
+    z-index: 100;
+    text-align: center;
+    position: absolute;
+    top: 100%;
+    right: -100%;
+    background-color: #9C34C2;
+    display: none;
+  }
+  
+  .miDiv.active {
+    z-index: 100;
+    text-align: center;
+    position: absolute;
+    top: 100%;
+    background-color: #9C34C2;
+    display: none;
+    right: 0;
+    transition: right 10s ease-in;
+    display: block;
+  }
 
 @media (min-width: 600px) and (max-width: 1200px) {
     .MeContainer{
@@ -183,17 +233,10 @@
         border-radius: 30px;
     }
 
-    .Menu nav ul{
-        list-style-type: none;
-        display: flex;
-        gap: 2em;
-        flex-wrap: wrap;
-        font-size: 20px;
-    }
-
   }
 
 @media (min-width: 1200px) {
+    
     .MeContainer{
         display: flex;
         flex-direction: row;
@@ -215,12 +258,6 @@
         border: solid rgb(163, 67, 161) 3px;
         border-radius: 30px;
     }
-    .Menu nav ul{
-        list-style-type: none;
-        display: flex;
-        gap: 2em;
-        flex-wrap: wrap;
-        font-size: 20px;
-    }
+    
 
   }
