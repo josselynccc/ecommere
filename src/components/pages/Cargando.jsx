@@ -93,7 +93,7 @@ const Cargando = ()=>{
         const animate = () => {
             const deltaTime = clock.getDelta();
             LimitZoom(camara,cuboScene);
-
+ 
             light.rotation.y += 0.05 * deltaTime
 
             const distancia = objNave.position.distanceTo(light.position)

@@ -5,7 +5,7 @@ import {Mesh, SphereGeometry} from 'three'
 
 export const AmbientLightScene = (scene) => {
     const ambientLight = new AmbientLight(0xffffff, 0.3)
-    scene.add(ambientLight)
+    scene.add(ambientLight) 
     return ambientLight
 }
 
