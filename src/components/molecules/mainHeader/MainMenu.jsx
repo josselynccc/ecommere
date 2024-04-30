@@ -14,7 +14,7 @@ const MainMenu = ({hideAboutMe, visibleAboutMe,nave, camara, planet}) =>{
     const divPlanetRef = useRef(null)
     const [isVisible, setIsVisible] = useState(false)
     const [isVisibleDivPlanet, setisVisibleDivPlanet] = useState(false)
-
+    const [isvisibleDivRef, setisVisibleDivRef]= useState(true)
     const lessThan600px = useMediaQuery('(max-width: 600px)')
 
     useEffect(()=>{
@@ -32,12 +32,17 @@ const MainMenu = ({hideAboutMe, visibleAboutMe,nave, camara, planet}) =>{
                 const intersects = raycaster.intersectObject(planetObj);
     
                 if (intersects.length > 0) {
+                    setTimeout(() => {
+                        setisVisibleDivRef(false)
+                    }, 1000)
 
                     setisVisibleDivPlanet(preState => !preState)
                     console.log(isVisibleDivPlanet)
                 }
             }
+            
         }
+
         document.addEventListener("click", handlePlanetClick);
         return () => {
             document.removeEventListener("click", handlePlanetClick);
@@ -45,7 +50,9 @@ const MainMenu = ({hideAboutMe, visibleAboutMe,nave, camara, planet}) =>{
         
     },[])
     
-    
+    const hidecv = () =>{
+        setisVisibleDivPlanet(false)
+    }
 
     const toggleMenu = ()=>{
         setIsVisible(preState => !preState)
@@ -84,6 +91,7 @@ const MainMenu = ({hideAboutMe, visibleAboutMe,nave, camara, planet}) =>{
                     <li><a style={{ color: '#9C34C2', textDecoration: 'none' }} to="/aboutMe" onClick={() => { 
                         visibleAboutMe() // Invoca la función hideAboutMe
                         NothandleClick()
+                        hidecv()
                       }}>Sobre Mi</a></li>
                     <li><a style={{ color: '#9C34C2',textDecoration: 'none' }} to="/cv" href="#planet" 
                     onClick={() => { 
@@ -91,12 +99,21 @@ const MainMenu = ({hideAboutMe, visibleAboutMe,nave, camara, planet}) =>{
                         handleZoomPlanet() // Llama a la función handleZoomPlanet
                         handleClick()
                       }}>CV</a></li>
-                    <li><a style={{ color: '#9C34C2',textDecoration: 'none' }} to="/aboutMe" href="#planet" onClick={hideAboutMe}>Proyectos</a></li>
-                    <li><a style={{ color: '#9C34C2',textDecoration: 'none' }} to="/aboutMe" href="#planet" onClick={hideAboutMe}>Contacto</a></li>
+                    <li><a style={{ color: '#9C34C2',textDecoration: 'none' }} to="/aboutMe" href="#planet" 
+                    onClick={() => { 
+                        hideAboutMe() // Invoca la función hideAboutMe
+                        hidecv()
+                      }}>Proyectos</a></li>
+                    <li><a style={{ color: '#9C34C2',textDecoration: 'none' }} to="/aboutMe" href="#planet" 
+                    onClick={() => { 
+                        hideAboutMe() // Invoca la función hideAboutMe
+                        hidecv()
+                      }}>Contacto</a></li>
                 </ul>
             </nav>
     </div>
-    <div ref={divRef} className="miDiv"><p>Click en el planeta</p></div>
+    {isvisibleDivRef && <div ref={divRef} className="miDiv"><p>Click en el planeta</p></div> }
+    
     
    
     <div ref={divPlanetRef} className={isVisibleDivPlanet? "miDiv active" : "miDiv"} >

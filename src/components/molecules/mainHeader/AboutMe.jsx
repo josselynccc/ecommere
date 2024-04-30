@@ -21,7 +21,6 @@ const AboutMe = () => {
           ,[])
 
     return (<>
-    <div className='aboutMe'>
         <div className='AboutMeContainer' >
             {/* <div className='redesSociales'>
                 <img src={github} alt="" />
@@ -33,7 +32,6 @@ const AboutMe = () => {
                 <p className="parrafo" ref={parrafoRef}>
                 </p>
                 <div>
-                <img src={video} alt=""/>
             </div>
             </div>
             <div className="redesSociales">
@@ -47,9 +45,12 @@ const AboutMe = () => {
                 <div><img src={sass} alt="" /> <p>SASS</p></div>
                 <div><img src={mongo} alt="" /> <p>MONGODB</p></div>
             </div>
+            <div className='videoIa'>
+                <img src={video} alt=""/>
+            </div>
             
         </div>
-        </div>
+    
     </>
         
     );

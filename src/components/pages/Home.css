@@ -19,14 +19,11 @@ body{
 }
 
 .fecha{
-    top: 1em;
-    padding-left: 1em;
-    padding-right: 1em;
+    top: 6em;
     position: absolute;
-    background: radial-gradient(ellipse at center,  #0a2e38  0%, #000000 70%);
-    width: 100vw;
-    color: aquamarine;
-    color: #ffffff;
+    background: radial-gradient(ellipse at center,  #0a2e38  0%, transparent 70%);
+    width: 10em;
+    right: 50%;
     text-align: center;
     color: #daf6ff;
     text-shadow: 0 0 20px rgba(10, 175, 230, 1),  0 0 20px rgba(10, 175, 230, 0);
@@ -41,4 +38,16 @@ body{
     font-family: 'Share Tech Mono', monospace;
     letter-spacing: 0.05em;
     font-size: 24px;
+}
+
+.frase{
+    text-shadow: 0 0 20px rgba(10, 175, 230, 1),  0 0 20px rgba(10, 175, 230, 0);
+    color: #daf6ff;
+    letter-spacing: 0.05em;
+    top: 6em;
+    left: 32%;
+    position: absolute;
+    background: radial-gradient(ellipse at center,  #0a2e38  0%, transparent 70%);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 40px;
 }

@@ -33,6 +33,7 @@ const MainHeader = ({nave, planet,camara}) =>{
                 camara = {camara}
                 planet = {planet}></MainMenu>
             </div>
+            
             <div className={ isVisibleAboutMe ? 'aboutMe VisibleAboutMeContainer' : 'aboutMe OcultoAboutMeContainer'}>
                 <AboutMe></AboutMe>
             </div>

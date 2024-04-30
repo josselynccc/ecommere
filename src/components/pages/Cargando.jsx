@@ -10,13 +10,15 @@ import { CreateNaveEspacial } from "../../helpers/CreateNaveEspacial.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls"
 import { colorTextureLuna } from "../../constants/Texturas.js";
 import './Home.css'
+import LeterforLeter from "../../helpers/LeterforLeter.js";
 const Cargando = ()=>{
     
     const [count, setcount] = useState(10)
     const rendererRef = useRef(null);
     const scene = new Scene()
-    const camara = CreateCamera({x:0, y:30, z:100})
+    const camara = CreateCamera({x:0, y:30, z:150})
     const naveRef = useRef([])
+    const letra = useRef(null)
     const date = new Date()
     const day = date.getDate()
     const month = date.getMonth() + 1
@@ -86,7 +88,8 @@ const Cargando = ()=>{
         naveRef.current.push(objNave)
         objNave.rotation.y = -Math.PI/2
 
-        
+        //letra por letra 
+        LeterforLeter('¡BIENVENIDO, EMPECEMOS!!', letra.current)
         
         //ANIMATE
         const clock = new Clock();
@@ -128,9 +131,11 @@ const Cargando = ()=>{
             <p className="date">{ formattedDate }</p>
             <p className="time">00:00:{count==10? count : `0${count}`}</p>
         </div>
-        
+        <div className="frase">
+            <p ref={letra}></p>
+        </div>
+
         <div className='creditos'>
-            &quot;Astronauta&quot; (https://skfb.ly/6GBvp) by Mora is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/). <br />
             &quot;Nave Espacial/Spacecraft&quot; (https://skfb.ly/6wCFG) by MatiasG729 is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
         </div>
     </>
