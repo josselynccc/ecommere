@@ -91,13 +91,13 @@ const MainMenu = ({hideAboutMe, visibleAboutMe, hideProyect, visibleproyect,hide
     <div className={lessThan600px ? (isVisible ? 'MenuVisible': 'MenuOculto') : 'Menu'}>
             <nav>
                 <ul>
-                    <li><a style={{ color: '#9C34C2', textDecoration: 'none' }} onClick={() => { 
+                    <li><a style={{ color: '#9C34C2', textDecoration: 'none' }} to="/aboutMe" onClick={() => { 
                         visibleAboutMe()
                         hidecv()
                         hideProyect()
                         hideContact()
                       }}>Sobre Mi</a></li>
-                    <li><a style={{ color: '#9C34C2',textDecoration: 'none' }} 
+                    <li><a style={{ color: '#9C34C2',textDecoration: 'none' }} to="/cv"
                     onClick={() => { 
                         hideAboutMe() 
                         handleZoomPlanet()
@@ -106,14 +106,14 @@ const MainMenu = ({hideAboutMe, visibleAboutMe, hideProyect, visibleproyect,hide
                         hideProyect()
                         hideContact()
                       }}>CV</a></li>
-                    <li><a style={{ color: '#9C34C2',textDecoration: 'none' }}  
+                    <li><a style={{ color: '#9C34C2',textDecoration: 'none' }} to="/aboutMe" 
                     onClick={() => { 
                         hideAboutMe() 
                         hidecv()
                         visibleproyect()
                         hideContact()
                       }}>Proyectos</a></li>
-                    <li><a style={{ color: '#9C34C2',textDecoration: 'none' }} 
+                    <li><a style={{ color: '#9C34C2',textDecoration: 'none' }} to="/aboutMe"
                     onClick={() => { 
                         hideAboutMe() 
                         hidecv()
