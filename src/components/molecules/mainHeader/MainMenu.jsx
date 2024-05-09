@@ -13,7 +13,7 @@ const MainMenu = ({hideAboutMe, visibleAboutMe, hideProyect, visibleproyect,hide
 
     const divRef = useRef(null)
     const divPlanetRef = useRef(null)
-    // const [isVisible, setIsVisible] = useState(false)
+    const [isVisible, setIsVisible] = useState(false)
     const [isVisibleDivPlanet, setisVisibleDivPlanet] = useState(false)
     const lessThan600px = useMediaQuery('(max-width: 600px)')
     const {setIsOrbitVisible} = useOrbitContext()
@@ -52,7 +52,7 @@ const MainMenu = ({hideAboutMe, visibleAboutMe, hideProyect, visibleproyect,hide
     }
 
     const toggleMenu = ()=>{
-        // setIsVisible(preState => !preState)
+        setIsVisible(preState => !preState)
     }
 
     const handleClick = () => {
@@ -88,16 +88,16 @@ const MainMenu = ({hideAboutMe, visibleAboutMe, hideProyect, visibleproyect,hide
 
     
     {lessThan600px && (<img className="menu_icon" src={menu} alt="menu" onClick={toggleMenu} />)}
-    {/* <div className={lessThan600px ? (isVisible ? 'MenuVisible': 'MenuOculto') : 'Menu'}>
+    <div className={lessThan600px ? (isVisible ? 'MenuVisible': 'MenuOculto') : 'Menu'}>
             <nav>
                 <ul>
-                    <li><a style={{ color: '#9C34C2', textDecoration: 'none' }} to="/aboutMe" onClick={() => { 
+                    <li><a style={{ color: '#9C34C2', textDecoration: 'none' }} onClick={() => { 
                         visibleAboutMe()
                         hidecv()
                         hideProyect()
                         hideContact()
                       }}>Sobre Mi</a></li>
-                    <li><a style={{ color: '#9C34C2',textDecoration: 'none' }} to="/cv" href="#planet" 
+                    <li><a style={{ color: '#9C34C2',textDecoration: 'none' }} 
                     onClick={() => { 
                         hideAboutMe() 
                         handleZoomPlanet()
@@ -106,14 +106,14 @@ const MainMenu = ({hideAboutMe, visibleAboutMe, hideProyect, visibleproyect,hide
                         hideProyect()
                         hideContact()
                       }}>CV</a></li>
-                    <li><a style={{ color: '#9C34C2',textDecoration: 'none' }} to="/aboutMe" href="#planet" 
+                    <li><a style={{ color: '#9C34C2',textDecoration: 'none' }}  
                     onClick={() => { 
                         hideAboutMe() 
                         hidecv()
                         visibleproyect()
                         hideContact()
                       }}>Proyectos</a></li>
-                    <li><a style={{ color: '#9C34C2',textDecoration: 'none' }} to="/aboutMe" href="#planet" 
+                    <li><a style={{ color: '#9C34C2',textDecoration: 'none' }} 
                     onClick={() => { 
                         hideAboutMe() 
                         hidecv()
@@ -122,43 +122,7 @@ const MainMenu = ({hideAboutMe, visibleAboutMe, hideProyect, visibleproyect,hide
                       }}>Contacto</a></li>
                 </ul>
             </nav>
-    </div> */}
-
-
-    <div className='Menu'>
-            <button style={{ color: '#9C34C2', textDecoration: 'none' }} to="/aboutMe" onClick={() => { 
-                visibleAboutMe()
-                hidecv()
-                hideProyect()
-                hideContact()
-            }}>Sobre Mi </button>
-            <button style={{ color: '#9C34C2',textDecoration: 'none' }} to="/cv" 
-            onClick={() => { 
-                hideAboutMe() 
-                handleZoomPlanet()
-                handlePlanetOrbit() 
-                handleClick()
-                hideProyect()
-                hideContact()
-            }}>CV</button>
-            <button style={{ color: '#9C34C2',textDecoration: 'none' }} to="/aboutMe"
-            onClick={() => { 
-                hideAboutMe() 
-                hidecv()
-                visibleproyect()
-                hideContact()
-            }}>Proyectos</button>
-            <button style={{ color: '#9C34C2',textDecoration: 'none' }} to="/aboutMe"  
-            onClick={() => { 
-                hideAboutMe() 
-                hidecv()
-                hideProyect()
-                visibleContact()
-            }}>Contacto</button>
-</div>
-
-    
-
+    </div>
     <div ref={divRef} className="miDiv"><p>Aterriza en el planeta</p></div>
    
     <div ref={divPlanetRef} className={isVisibleDivPlanet? "miDiv active" : "miDiv"} >

@@ -6,7 +6,7 @@ import {CreatePlanet} from "../../helpers/CreatePlanet.js"
 import LimitZoom from '../../helpers/LimitZoom.js'
 import {useRef, useEffect } from 'react'
 import CreateCamera from '../../helpers/CreateCamara'
-import HandleDoubleClick from '../../helpers/HandleDoubleClick.js'
+// import HandleDoubleClick from '../../helpers/HandleDoubleClick.js'
 import Resize from '../../helpers/Resize.js'
 import {PointLightStar,AmbientLightScene, PointLightScene } from '../../helpers/Lights.js'
 import {CreateOrbitPlanet} from '../../helpers/CreateOrbitaPlanet.js'
@@ -153,16 +153,16 @@ const Home = () =>{
         }
 
         animate()
-        //FULLSCREEN
-        const FullScreen = () => {HandleDoubleClick(renderer.domElement)}
-        window.addEventListener('dblclick', FullScreen) 
+        // //FULLSCREEN
+        // const FullScreen = () => {HandleDoubleClick(renderer.domElement)}
+        // window.addEventListener('dblclick', FullScreen) 
         
         
        
         
         //REMOVER LA FUNCION AL DESMONTAR EL COMPONENTE
         return () =>{
-            window.removeEventListener('dblclick', FullScreen)
+            // window.removeEventListener('dblclick', FullScreen)
             renderer.dispose()
             document.body.removeChild(renderer.domElement)
         }
