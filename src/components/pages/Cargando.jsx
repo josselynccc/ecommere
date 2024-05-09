@@ -11,6 +11,8 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls"
 import { colorTextureLuna } from "../../constants/Texturas.js";
 import './Home.css'
 import LeterforLeter from "../../helpers/LeterforLeter.js";
+
+
 const Cargando = ()=>{
     
     const [count, setcount] = useState(10)
@@ -20,19 +22,25 @@ const Cargando = ()=>{
     const naveRef = useRef([])
     const letra = useRef(null)
     const date = new Date()
-    const day = date.getDate()
+    const day = date.getDay()
     const month = date.getMonth() + 1
     const year = date.getFullYear()
-    const formattedDate = `${day}-${month}-${year}`;
-    console.log(date)
-    useEffect(()=>{
+    
+    function addZeroIfNeeded(number) {
+        return number < 10 ? '0' + number : number;
+    }
 
+    const formattedDate = `${addZeroIfNeeded(day)}-${addZeroIfNeeded(month)}-${addZeroIfNeeded(year)}`;
+    console.log(formattedDate)
+    useEffect(()=>{
+        
         if (rendererRef.current) {
             rendererRef.current.dispose();
         }
 
         //CREANDO LA ESCENA
         scene.background = new Color( 0x404040 );
+
 
         //LIGHT A LA ESCENA
         AmbientLightScene(scene)
@@ -58,7 +66,7 @@ const Cargando = ()=>{
         scene.add(cuboScene)
 
         
-        const light = PointLightScene(scene,0xcccccc,colorTextureLuna)
+        const light = PointLightScene(scene,colorTextureLuna)
 
         light.position.x = 80
         light.position.y = 0
@@ -69,6 +77,8 @@ const Cargando = ()=>{
         //CONTAFOR
         const time = setInterval(()=>{setcount(prevCount =>prevCount-1)},1000)
         
+
+
         //RENDERIZANDO
         const renderer = new WebGLRenderer()
         renderer.setSize(width, height)
@@ -90,6 +100,7 @@ const Cargando = ()=>{
 
         //letra por letra 
         LeterforLeter('¡BIENVENIDO, EMPECEMOS!!', letra.current)
+
         
         //ANIMATE
         const clock = new Clock();
@@ -109,7 +120,6 @@ const Cargando = ()=>{
 
             renderScene()
             requestAnimationFrame(animate)
-        
         }
 
         animate()
@@ -117,6 +127,7 @@ const Cargando = ()=>{
         
         //REMOVER LA FUNCION AL DESMONTAR EL COMPONENTE
         return () =>{
+            
             renderer.dispose()
             document.body.removeChild(renderer.domElement)
             clearInterval(time)
@@ -126,11 +137,14 @@ const Cargando = ()=>{
     
 
     return <>
-        
-        <div className="fecha">
-            <p className="date">{ formattedDate }</p>
-            <p className="time">00:00:{count==10? count : `0${count}`}</p>
+
+        <div className="containerfecha">
+            <div className="fecha">
+                <p className="date">{ formattedDate }</p>
+                <p className="time">00:00:{count==10? count : `0${count}`}</p>
+            </div>
         </div>
+        
         <div className="frase">
             <p ref={letra}></p>
         </div>

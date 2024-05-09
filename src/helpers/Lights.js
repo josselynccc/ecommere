@@ -9,14 +9,13 @@ export const AmbientLightScene = (scene) => {
     return ambientLight
 }
 
-export const PointLightScene = (scene,colorp, colorTexture) => {
+export const PointLightScene = (scene, colorTexture) => {
     const light1 = new PointLight( 0xF9BB00, 20000 , 1000000);
     light1.castShadow = true
     light1.position.set(0,0,0)
     light1.decay = 2;
-	light1.add( new Mesh( new SphereGeometry( 16, 60 ), new MeshBasicMaterial( {color:colorp , map: colorTexture, } ) ) );
+	light1.add( new Mesh( new SphereGeometry( 16, 60 ), new MeshBasicMaterial( { color: 0xF9BB00, map: colorTexture, } ) ) );
     scene.add( light1 )
-
     return light1
 }
 

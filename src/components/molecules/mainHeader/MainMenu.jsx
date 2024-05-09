@@ -7,15 +7,16 @@ import { useMediaQuery } from '@react-hook/media-query'
 import { MoveNaveToPlanet, ZoomToPlanet } from "../../../helpers/ZoomToPlanet"
 import { Raycaster, Vector2 } from 'three'
 import Cv from "../../pages/Cv"
+import { useOrbitContext } from '../../../context/UseOrbitContext.jsx'
 
-const MainMenu = ({hideAboutMe, visibleAboutMe,nave, camara, planet}) =>{
+const MainMenu = ({hideAboutMe, visibleAboutMe, hideProyect, visibleproyect,hideContact, visibleContact,nave, camara, planet}) =>{
 
     const divRef = useRef(null)
     const divPlanetRef = useRef(null)
-    const [isVisible, setIsVisible] = useState(false)
+    // const [isVisible, setIsVisible] = useState(false)
     const [isVisibleDivPlanet, setisVisibleDivPlanet] = useState(false)
-    const [isvisibleDivRef, setisVisibleDivRef]= useState(true)
     const lessThan600px = useMediaQuery('(max-width: 600px)')
+    const {setIsOrbitVisible} = useOrbitContext()
 
     useEffect(()=>{
         const handlePlanetClick = (event) => {
@@ -32,10 +33,6 @@ const MainMenu = ({hideAboutMe, visibleAboutMe,nave, camara, planet}) =>{
                 const intersects = raycaster.intersectObject(planetObj);
     
                 if (intersects.length > 0) {
-                    setTimeout(() => {
-                        setisVisibleDivRef(false)
-                    }, 1000)
-
                     setisVisibleDivPlanet(preState => !preState)
                     console.log(isVisibleDivPlanet)
                 }
@@ -55,18 +52,16 @@ const MainMenu = ({hideAboutMe, visibleAboutMe,nave, camara, planet}) =>{
     }
 
     const toggleMenu = ()=>{
-        setIsVisible(preState => !preState)
+        // setIsVisible(preState => !preState)
     }
 
     const handleClick = () => {
         if (divRef.current) {
             divRef.current.classList.add('active');
+            setTimeout(() => {
+                divRef.current.classList.remove('active');
+            }, 3000)
         }
-    };
-    const NothandleClick = () => {
-        if (divRef.current) {
-            divRef.current.classList.remove('active');
-          }
     };
 
     useEffect(() => {
@@ -81,40 +76,90 @@ const MainMenu = ({hideAboutMe, visibleAboutMe,nave, camara, planet}) =>{
         console.log("hola")
     }
 
+    const handlePlanetOrbit = ()=>{
+        setIsOrbitVisible(false)
+        setTimeout(()=>{setIsOrbitVisible(true)},20000)
+        console.log({setIsOrbitVisible})
+    }
+
+    
+
     return <>
 
     
     {lessThan600px && (<img className="menu_icon" src={menu} alt="menu" onClick={toggleMenu} />)}
-    <div className={lessThan600px ? (isVisible ? 'MenuVisible': 'MenuOculto') : 'Menu'}>
+    {/* <div className={lessThan600px ? (isVisible ? 'MenuVisible': 'MenuOculto') : 'Menu'}>
             <nav>
                 <ul>
                     <li><a style={{ color: '#9C34C2', textDecoration: 'none' }} to="/aboutMe" onClick={() => { 
-                        visibleAboutMe() // Invoca la función hideAboutMe
-                        NothandleClick()
+                        visibleAboutMe()
                         hidecv()
+                        hideProyect()
+                        hideContact()
                       }}>Sobre Mi</a></li>
                     <li><a style={{ color: '#9C34C2',textDecoration: 'none' }} to="/cv" href="#planet" 
                     onClick={() => { 
-                        hideAboutMe() // Invoca la función hideAboutMe
-                        handleZoomPlanet() // Llama a la función handleZoomPlanet
+                        hideAboutMe() 
+                        handleZoomPlanet()
+                        handlePlanetOrbit() 
                         handleClick()
+                        hideProyect()
+                        hideContact()
                       }}>CV</a></li>
                     <li><a style={{ color: '#9C34C2',textDecoration: 'none' }} to="/aboutMe" href="#planet" 
                     onClick={() => { 
-                        hideAboutMe() // Invoca la función hideAboutMe
+                        hideAboutMe() 
                         hidecv()
+                        visibleproyect()
+                        hideContact()
                       }}>Proyectos</a></li>
                     <li><a style={{ color: '#9C34C2',textDecoration: 'none' }} to="/aboutMe" href="#planet" 
                     onClick={() => { 
-                        hideAboutMe() // Invoca la función hideAboutMe
+                        hideAboutMe() 
                         hidecv()
+                        hideProyect()
+                        visibleContact()
                       }}>Contacto</a></li>
                 </ul>
             </nav>
-    </div>
-    {isvisibleDivRef && <div ref={divRef} className="miDiv"><p>Click en el planeta</p></div> }
+    </div> */}
+
+
+    <div className='Menu'>
+            <button style={{ color: '#9C34C2', textDecoration: 'none' }} to="/aboutMe" onClick={() => { 
+                visibleAboutMe()
+                hidecv()
+                hideProyect()
+                hideContact()
+            }}>Sobre Mi </button>
+            <button style={{ color: '#9C34C2',textDecoration: 'none' }} to="/cv" 
+            onClick={() => { 
+                hideAboutMe() 
+                handleZoomPlanet()
+                handlePlanetOrbit() 
+                handleClick()
+                hideProyect()
+                hideContact()
+            }}>CV</button>
+            <button style={{ color: '#9C34C2',textDecoration: 'none' }} to="/aboutMe"
+            onClick={() => { 
+                hideAboutMe() 
+                hidecv()
+                visibleproyect()
+                hideContact()
+            }}>Proyectos</button>
+            <button style={{ color: '#9C34C2',textDecoration: 'none' }} to="/aboutMe"  
+            onClick={() => { 
+                hideAboutMe() 
+                hidecv()
+                hideProyect()
+                visibleContact()
+            }}>Contacto</button>
+</div>
+
     
-    
+
+    <div ref={divRef} className="miDiv"><p>Aterriza en el planeta</p></div>
    
     <div ref={divPlanetRef} className={isVisibleDivPlanet? "miDiv active" : "miDiv"} >
         <div className='DivCurriculum'>

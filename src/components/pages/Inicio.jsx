@@ -1,5 +1,6 @@
 import { useState } from "react"
 import Cargando from "./Cargando"
+
 import Home from "./Home"
 
 const Inicio = ()=>{

@@ -11,14 +11,14 @@ import Resize from '../../helpers/Resize.js'
 import {PointLightStar,AmbientLightScene, PointLightScene } from '../../helpers/Lights.js'
 import {CreateOrbitPlanet} from '../../helpers/CreateOrbitaPlanet.js'
 import {CreateNaveEspacial} from '../../helpers/CreateNaveEspacial.js'
-import MainHeader from '../organism/MainHeader.jsx';
+import MainHeader from '../organism/MainHeader.jsx'
 const Home = () =>{
     
     const planetsRef = useRef([]);
     const orbitsRef = useRef([]);
     const rendererRef = useRef(null);
     const scene = new Scene()
-    const camara = CreateCamera({x:0, y:80, z:300})
+    const camara = CreateCamera({x:0, y:50, z:250})
     const naveRef = useRef([])
     
     useEffect(()=>{
@@ -49,7 +49,7 @@ const Home = () =>{
         scene.add(cuboScene)
 
         
-        const light = PointLightScene(scene,0xF9BB00, colorTextureSol)
+        const light = PointLightScene(scene,colorTextureSol)
         
         camara.lookAt(0,0,0) //camara mira a la sphera
 
@@ -116,14 +116,10 @@ const Home = () =>{
             renderer.render(scene, camara)
         }
 
-        
-
-
+        //OBJETO NAVE
         const objNave = CreateNaveEspacial(scene, {x:0,y:20,z:200})
         naveRef.current.push(objNave)
         console.log(naveRef)
-
-
 
         //ANIMATE
         const clock = new Clock();
@@ -133,21 +129,24 @@ const Home = () =>{
 
             light.rotation.y += 0.05 * deltaTime
 
+   
             planetsRef.current.forEach((planetData, index) => {
-                const planet = planetData.planetObj;
-                const Speed = planetData.rotationSpeed
-                const orbit = orbitsRef.current[index];
-                const currentTime = Date.now() * 0.00001 * Speed
-                const position = orbit.calculatePosition(currentTime);
-                planet.position.copy(position);
+                
+                    const planet = planetData.planetObj;
+                    const Speed = planetData.rotationSpeed
+                    const orbit = orbitsRef.current[index]
+                    const currentTime = Date.now() * 0.00001 * Speed
+                    const position = orbit.calculatePosition(currentTime);
+                    planet.position.copy(position);
+                
             })
+            
 
             planetsRef.current.forEach((planetData) => {
                 const planet = planetData.planetObj
                 planet.rotation.y += planetData.rotationSpeed * deltaTime * 0.5
                
             })
-
             renderScene()
             requestAnimationFrame(animate)
         

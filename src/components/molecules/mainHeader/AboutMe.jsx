@@ -27,10 +27,14 @@ const AboutMe = () => {
                 <img src={whatsapp} alt="" />
                 <img src={telefono} alt="" />
             </div> */}
+            
             <div className="MeContainer">
                 <img className='AboutMeContainerFoto' src={foto} alt="" />
                 <p className="parrafo" ref={parrafoRef}>
                 </p>
+                <div className='videoIa'>
+                <img src={video} alt=""/>
+            </div>
                 <div>
             </div>
             </div>
@@ -45,9 +49,7 @@ const AboutMe = () => {
                 <div><img src={sass} alt="" /> <p>SASS</p></div>
                 <div><img src={mongo} alt="" /> <p>MONGODB</p></div>
             </div>
-            <div className='videoIa'>
-                <img src={video} alt=""/>
-            </div>
+            
             
         </div>
     

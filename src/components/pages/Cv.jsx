@@ -1,7 +1,11 @@
+import './Home.css'
 const Cv = () =>{    
 
     return<>
-    <iframe src="https://drive.google.com/file/d/1pRXOAmIjyj-DAPPJfYbXqvm4cFYQcmps/preview" width="500" height="700"></iframe>
+    <div className='iframeContainer'>
+    <iframe className="iframe_cv" src="https://drive.google.com/file/d/1pRXOAmIjyj-DAPPJfYbXqvm4cFYQcmps/preview"></iframe>
+    </div>
+    
 
     </>
 }

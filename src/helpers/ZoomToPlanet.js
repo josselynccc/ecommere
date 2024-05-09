@@ -7,7 +7,6 @@ export const MoveNaveToPlanet  = (nave, planet)=>{
     
     const planetObj = planet[0].planetObj
     const naveObj = nave[0]
-    console.log(planetObj,naveObj)
 
     const planetPosition = new Vector3()
     planetObj.getWorldPosition(planetPosition)
@@ -22,26 +21,25 @@ export const MoveNaveToPlanet  = (nave, planet)=>{
     new Tween(navePosition)
     .to(planetPosition, tweenDuration)
     .easing(Easing.Quadratic.InOut)
-    .onUpdate(()=>{
-      naveObj.position.copy(navePosition)
-    })
     .start()
   }else{
     console.log("no exist planet")
   }
 }
 
+
 export const ZoomToPlanet = (camara, planet) => {
   if(planet[0]) {
     const planetObj = planet[0].planetObj
     console.log(planetObj)
+
     const planetPosition = new Vector3();
     planetObj.getWorldPosition(planetPosition)
 
     const zoomPosition = planetPosition.clone().multiplyScalar(1.2);
     camara.position.x= zoomPosition.x
-    camara.position.y= 10
-    camara.position.z= zoomPosition.z-3
+    camara.position.y= zoomPosition.y+10
+    camara.position.z= zoomPosition.z-10
     camara.lookAt(planetPosition)
 
   }else{
