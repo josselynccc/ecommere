@@ -5,7 +5,7 @@ const LeterforLeter = (frase, container) => {
         container.innerHTML += arrcontent[i]
         i++
 
-        if(i===arrcontent.length -1){
+        if(i===arrcontent.length){
             clearInterval(print)
         }
     }, 100)

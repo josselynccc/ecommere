@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from 'react';
 import './Contacto.css'
 import axios from 'axios';
+import LeterforLeter from '../../helpers/LeterforLeter';
 const Contacto = ()=>{
     const[message,setmessage]=useState({
         nombre:"",
@@ -17,6 +18,10 @@ const Contacto = ()=>{
         const spanemailRef = useRef(null);
         const mensajeRef = useRef(null);
         const spanmensajeRef = useRef(null);
+        const letra = useRef("")
+        const letra1 = useRef("")
+        const letra2 = useRef("")
+        const letra3 = useRef("")
 
         useEffect(() => {
             const nombreInput = nombreRef.current;
@@ -60,6 +65,17 @@ const Contacto = ()=>{
             spanemail.addEventListener('click', handleSpanClick);
             spanmensaje.addEventListener('click', handleSpanClick);
 
+            const loadLetters = ()=>{
+                LeterforLeter(`CONTACTO `, letra.current)
+                LeterforLeter(`Tienes alguna pregunta `, letra1.current)
+                LeterforLeter(`o simplemente quieres saludar `, letra2.current)
+                LeterforLeter(`¡ADELANTE! `, letra3.current)
+            }
+
+            const containerContacto = document.querySelector('.containerContacto');
+            containerContacto.addEventListener('mouseenter', loadLetters);
+            containerContacto.addEventListener('touchstart', loadLetters);
+
             return () => {
                 // Quitar event listeners al desmontar el componente
                 nombreInput.removeEventListener('focus', () => handleInputChange(nombreInput));
@@ -75,6 +91,9 @@ const Contacto = ()=>{
                 spanapellido.removeEventListener('click', handleSpanClick);
                 spanemail.removeEventListener('click', handleSpanClick);
                 spanmensaje.removeEventListener('click', handleSpanClick);
+
+                containerContacto.removeEventListener('mouseenter', loadLetters);
+                containerContacto.addEventListener('touchstart', loadLetters);
             };
         }, []);
 
@@ -108,11 +127,11 @@ const Contacto = ()=>{
         };
     return <>
     <div className='containerContacto'>
-        <div>
-            <h2>CONTACTO</h2>
-            <p>Tienes alguna pregunta o propuesta.</p>
-            <p>o simplemente quieres saludar</p>
-            <p>ADELANTE</p>
+        <div className='titleContact' >
+            <p ref={letra}></p>
+            <p ref={letra1}></p>
+            <p ref={letra2}></p>
+            <p ref={letra3}></p>
         </div>
 
         <form id="formulario" className="formulario" onSubmit={handleSubmit}>

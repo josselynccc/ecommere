@@ -20,6 +20,10 @@
     transition: right 0.6s ease;
 }
 
+.titleContact{
+	letter-spacing: 0.1em;
+}
+
 /* Contacto */
 .containerContacto{
     display: flex;

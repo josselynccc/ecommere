@@ -37,13 +37,12 @@
     grid-template-columns: repeat(auto-fill,minmax(400px,1fr));    gap: 1em;
     width: 50%;
     height: 100%;
-    overflow: auto;
 }
 .ProyectsDiv{
     padding: 1em;
     position: relative;
     width: 100%;
-    height: auto;
+    height: 300px;
 }
 .ProyectsDivInfo{
     border-radius: 20px;
@@ -93,7 +92,7 @@
 .DivProyectsInformation_key{
     display: flex;
     flex-direction: column;
-    width: 40%;
+    width: 100%;
     background-color: #06101a;
     color: rgb(255, 255, 255);
 }
@@ -116,4 +115,18 @@
     display: flex;
     justify-content:space-around;
     background-color: #091521;
+}
+
+
+
+
+
+@media (min-width: 600px) {
+    .DivProyectsInformation_key{
+        display: flex;
+        flex-direction: column;
+        width: 40%;
+        background-color: #06101a;
+        color: rgb(255, 255, 255);
+    }
 }

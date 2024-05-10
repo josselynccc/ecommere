@@ -32,6 +32,12 @@ body{
     font-family: 'Share Tech Mono', monospace;
     font-size: 20px;
 }
+.fecha{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
 
 .date{
     font-family: 'Share Tech Mono', monospace;
