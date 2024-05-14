@@ -96,6 +96,7 @@ const MainMenu = ({hideAboutMe, visibleAboutMe, hideProyect, visibleproyect,hide
                         hidecv()
                         hideProyect()
                         hideContact()
+                        toggleMenu()
                       }}>Sobre Mi</a></li>
                     <li><a style={{ color: '#9C34C2',textDecoration: 'none' }} to="/cv"
                     onClick={() => { 
@@ -105,6 +106,7 @@ const MainMenu = ({hideAboutMe, visibleAboutMe, hideProyect, visibleproyect,hide
                         handleClick()
                         hideProyect()
                         hideContact()
+                        toggleMenu()
                       }}>CV</a></li>
                     <li><a style={{ color: '#9C34C2',textDecoration: 'none' }} to="/aboutMe" 
                     onClick={() => { 
@@ -112,6 +114,7 @@ const MainMenu = ({hideAboutMe, visibleAboutMe, hideProyect, visibleproyect,hide
                         hidecv()
                         visibleproyect()
                         hideContact()
+                        toggleMenu()
                       }}>Proyectos</a></li>
                     <li><a style={{ color: '#9C34C2',textDecoration: 'none' }} to="/aboutMe"
                     onClick={() => { 
@@ -119,6 +122,7 @@ const MainMenu = ({hideAboutMe, visibleAboutMe, hideProyect, visibleproyect,hide
                         hidecv()
                         hideProyect()
                         visibleContact()
+                        toggleMenu()
                       }}>Contacto</a></li>
                 </ul>
             </nav>
@@ -127,7 +131,7 @@ const MainMenu = ({hideAboutMe, visibleAboutMe, hideProyect, visibleproyect,hide
    
     <div ref={divPlanetRef} className={isVisibleDivPlanet? "miDiv active" : "miDiv"} >
         <div className='DivCurriculum'>
-            <Cv></Cv>
+            <Cv hidecv = {hidecv}></Cv>
         </div>
 
     </div>

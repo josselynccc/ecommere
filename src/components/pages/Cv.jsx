@@ -1,12 +1,12 @@
 import './Home.css'
-const Cv = () =>{    
+import back from '../../assets/proyects/icon_back.png'
+const Cv = ({hidecv}) =>{    
 
     return<>
     <div className='iframeContainer'>
-    <iframe className="iframe_cv" src="https://drive.google.com/file/d/1pRXOAmIjyj-DAPPJfYbXqvm4cFYQcmps/preview"></iframe>
+        <div><img src={back} alt="" onClick={hidecv} /></div>
+        <iframe className="iframe_cv" src="https://drive.google.com/file/d/1pRXOAmIjyj-DAPPJfYbXqvm4cFYQcmps/preview"></iframe>
     </div>
-    
-
     </>
 }
 export default Cv

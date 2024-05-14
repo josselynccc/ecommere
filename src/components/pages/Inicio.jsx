@@ -1,18 +1,19 @@
-import { useState } from "react"
-import Cargando from "./Cargando"
+// import { useState } from "react"
+// import Cargando from "./Cargando"
 
 import Home from "./Home"
 
 const Inicio = ()=>{
 
-    const [mostrarCarga, setMostrarCarga] = useState(true)
-    setTimeout(()=>{
-        setMostrarCarga(false)
-    },10000)
+    // const [mostrarCarga, setMostrarCarga] = useState(true)
+    // setTimeout(()=>{
+    //     setMostrarCarga(false)
+    // },10000)
 
     return <>
         <div>
-            {mostrarCarga ? <Cargando></Cargando> : <Home></Home>}
+            <Home></Home>
+            {/* {mostrarCarga ? <Cargando></Cargando> : <Home></Home>} */}
         </div>
     </>
 }

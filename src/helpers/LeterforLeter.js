@@ -1,14 +1,18 @@
 const LeterforLeter = (frase, container) => {
     const arrcontent = frase.split('')
     let i = 0
-    let print = setInterval(()=>{
-        container.innerHTML += arrcontent[i]
+
+    const print = () =>{
+        if (container) {
+        container.textContent += arrcontent[i]
         i++
 
-        if(i===arrcontent.length){
-            clearInterval(print)
+        if(i<arrcontent.length){
+            requestAnimationFrame(print)
         }
-    }, 100)
+    }
+    }
+    requestAnimationFrame(print)
 };
 
 export default LeterforLeter;

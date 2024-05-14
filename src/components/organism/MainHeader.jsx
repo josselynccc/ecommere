@@ -43,6 +43,7 @@ const MainHeader = ({nave, planet,camara}) =>{
     }
 
 
+
     return <>
         {/* <div className='mainHeader'> */}
             <div className='logoAndMenu'>
@@ -61,7 +62,7 @@ const MainHeader = ({nave, planet,camara}) =>{
             </div>
             
             <div className={ isVisibleAboutMe ? 'aboutMe VisibleAboutMeContainer' : 'aboutMe OcultoAboutMeContainer'}>
-                <AboutMe></AboutMe>
+                <AboutMe isVisibleAboutMe={isVisibleAboutMe}></AboutMe>
             </div>
 
             <div className={isVisibleProyect? 'proyect visibleProyect': 'proyect ocultoProyect'}>
@@ -69,7 +70,7 @@ const MainHeader = ({nave, planet,camara}) =>{
             </div>
 
             <div className={isVisibleContact? 'Contacto visibleProyect': 'proyect ocultoProyect'}>
-                <Contacto></Contacto>
+                <Contacto isVisibleContact={isVisibleContact}></Contacto>
             </div>
         {/* </div> */}
     </>

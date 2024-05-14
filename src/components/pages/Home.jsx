@@ -1,4 +1,4 @@
-import {Mesh,Clock,MeshStandardMaterial,Color, WebGLRenderer, Scene, SphereGeometry, BackSide } from 'three'
+import {Mesh,Clock,MeshStandardMaterial,Color, WebGLRenderer, Scene, SphereGeometry, BackSide, Vector3 } from 'three'
 import { colorTextureStar,colorTextureScene,colorTexture,cloudTexture,colorTextureMercury,colorTextureVenus,colorTextureMarte,colorTextureJupiter,colorTextureSaturno,colorTextureUrano, colorTextureNeptuno, colorTextureSol } from '../../constants/Texturas.js'
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls"
 import './Home.css'
@@ -144,8 +144,25 @@ const Home = () =>{
 
             planetsRef.current.forEach((planetData) => {
                 const planet = planetData.planetObj
-                planet.rotation.y += planetData.rotationSpeed * deltaTime * 0.5
-               
+                const planetPosition = planet.getWorldPosition(new Vector3());
+                const textGroup = planet.userData.textGroup
+                const cameraPosition = camara.position
+                const distance = planetPosition.distanceTo(cameraPosition)
+                
+                if (textGroup) {
+                    let scaleFactor;
+                if (distance > 80) {
+                    scaleFactor = 1; 
+                } else if (distance < 80) {
+                    scaleFactor = 0.3; 
+                } else {
+                    scaleFactor = 1 - (distance - 1) * 0.1;
+                }
+                textGroup.scale.set(scaleFactor, scaleFactor + 0.3, scaleFactor);
+                    
+                    const rotationSpeed = planetData.rotationSpeed * (1 + distance * 0.001);
+                    planet.rotation.y += rotationSpeed * deltaTime * 0.5
+                }   
             })
             renderScene()
             requestAnimationFrame(animate)
@@ -180,10 +197,10 @@ const Home = () =>{
         )}
         
 
-        <div className='creditos'>
+        {/* <div className='creditos'>
             &quot;Astronauta&quot; (https://skfb.ly/6GBvp) by Mora is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/). <br />
             &quot;Nave Espacial/Spacecraft&quot; (https://skfb.ly/6wCFG) by MatiasG729 is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
-        </div>
+        </div> */}
     </>
 }
 

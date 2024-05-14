@@ -37,17 +37,20 @@ export const CreatePlanet = (scene, textura, radio, alphaMapTexture, texto) => {
        
         fontload.load(ruta, (gltf) => {
             letra = gltf.scene
-            const scaleFactor = 0.1
+            const scaleFactor = 0.3
             letra.scale.set(scaleFactor, scaleFactor, scaleFactor)
             
             letra.rotation.y = Math.PI/2
     
             letra.position.x = 0
-            letra.position.y = radio
+            letra.position.y = radio+5
             letra.position.z = 0
 
             const textGroup = new Group();
-            textGroup.add(letra);
+            textGroup.add(letra)
+
+            planet.userData.textGroup = textGroup
+
             planet.add(textGroup)
         });
     }

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { proyectosData } from "../../constants/ProyectosData.js";
 import './Proyectos.css';
+import { useMediaQuery } from '@react-hook/media-query'
 import icon_back from '../../assets/proyects/icon_back.png'
 import whatsapp from '../../assets/redes/whatsapp.png'
 import github from '../../assets/redes/GitHub_Invertocat_Logo.png'
@@ -10,6 +11,8 @@ const Proyectos = () => {
     const [hoveredProyect, setHoveredProyect] = useState(null);
     const [visibleInfoProyect, setvisibleInfoProyect] = useState(false)
     
+    const lessThan600px = useMediaQuery('(max-width: 600px)')
+
     const handleClick = (proyectKey) =>{
         setSelectedProyect(proyectKey);
         setvisibleInfoProyect(true)
@@ -44,7 +47,18 @@ const Proyectos = () => {
                         onMouseLeave={handleMouseLeave}
                         >
                         <img  src={proyectosData[key].gif} alt="" style={{borderRadius:'20px',display:'block',width:'100%', height:'100%'}} />    
-                            { hoveredProyect === key && 
+                            {lessThan600px ? (
+                            <div className="ProyectsDivInfom600">
+                                <h2>{proyectosData[key].titulo}</h2>
+                                <p>{proyectosData[key].descCorta}</p>
+                                <div className="ProyectsDivInfo_tec">
+                                    {proyectosData[key].tecnologias.map((tecnologia, index) => (
+                                        <p key={index} style={{width:'auto', backgroundColor: 'gray', borderRadius: '20px', padding: '10px 10px 10px 10px', margin: '5px 0' }}>
+                                            {tecnologia}
+                                        </p>
+                                    ))}
+                                </div>
+                            </div>): ( (hoveredProyect === key) && 
                             <div className="ProyectsDivInfo">
                                 <h2>{proyectosData[key].titulo}</h2>
                                 <p>{proyectosData[key].descCorta}</p>
@@ -55,8 +69,7 @@ const Proyectos = () => {
                                         </p>
                                     ))}
                                 </div>
-                                
-                            </div>}
+                            </div>)}
                             
                         </div>
                     ))}

@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import './Contacto.css'
 import axios from 'axios';
 import LeterforLeter from '../../helpers/LeterforLeter';
-const Contacto = ()=>{
+const Contacto = ({isVisibleContact})=>{
     const[message,setmessage]=useState({
         nombre:"",
         apellido:"",
@@ -22,6 +22,20 @@ const Contacto = ()=>{
         const letra1 = useRef("")
         const letra2 = useRef("")
         const letra3 = useRef("")
+
+        console.log(isVisibleContact)
+        if(isVisibleContact == true){
+            LeterforLeter(`CONTACTO `, letra.current)
+            LeterforLeter(`Tienes alguna pregunta `, letra1.current)
+            LeterforLeter(`o simplemente quieres saludar `, letra2.current)
+            LeterforLeter(`¡ADELANTE! `, letra3.current)
+        }
+        else{
+            letra.current = null 
+            letra1.current = null
+            letra2.current = null
+            letra3.current = null
+        }
 
         useEffect(() => {
             const nombreInput = nombreRef.current;
@@ -65,16 +79,11 @@ const Contacto = ()=>{
             spanemail.addEventListener('click', handleSpanClick);
             spanmensaje.addEventListener('click', handleSpanClick);
 
-            const loadLetters = ()=>{
-                LeterforLeter(`CONTACTO `, letra.current)
-                LeterforLeter(`Tienes alguna pregunta `, letra1.current)
-                LeterforLeter(`o simplemente quieres saludar `, letra2.current)
-                LeterforLeter(`¡ADELANTE! `, letra3.current)
-            }
+            
 
-            const containerContacto = document.querySelector('.containerContacto');
-            containerContacto.addEventListener('mouseenter', loadLetters);
-            containerContacto.addEventListener('touchstart', loadLetters);
+            
+           
+            
 
             return () => {
                 // Quitar event listeners al desmontar el componente
@@ -91,9 +100,6 @@ const Contacto = ()=>{
                 spanapellido.removeEventListener('click', handleSpanClick);
                 spanemail.removeEventListener('click', handleSpanClick);
                 spanmensaje.removeEventListener('click', handleSpanClick);
-
-                containerContacto.removeEventListener('mouseenter', loadLetters);
-                containerContacto.addEventListener('touchstart', loadLetters);
             };
         }, []);
 
