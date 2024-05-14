@@ -23,10 +23,7 @@ const AboutMe = ({isVisibleAboutMe}) => {
         else{ 
             parrafoRef.current = null
         }
- 
-    
         
-
     return (<>
         <div className='AboutMeContainer' >
             {/* <div className='redesSociales'>
@@ -37,25 +34,25 @@ const AboutMe = ({isVisibleAboutMe}) => {
             
             <div className="MeContainer">
                 <img className='AboutMeContainerFoto' src={foto} alt="" />
-                <p className="parrafo" ref={parrafoRef}>
-                </p>
+                <p className="parrafo" ref={parrafoRef}></p>
                 <div className='videoIa'>
-                <img src={video} alt=""/>
+                    <img src={video} alt=""/>
+                </div>
             </div>
-                <div>
+            <div className='containerRedes'>
+                <div className="redesSociales">
+                    <div><img src={react} alt="" /> <p>REACT</p></div>
+                    <div><img src={js} alt="" /> <p>JAVASCRIPT</p></div>
+                    <div><img src={angular} alt="" /> <p>ANGULAR</p></div>
+                    <div><img src={adobexd} alt="" /> <p>ADOBEXD</p></div>
+                    <div><img src={python} alt="" /> <p>PYTHON</p></div>
+                    <div><img src={node} alt="" /> <p>NODEJS</p></div>
+                    <div><img src={git} alt="" /> <p>GIT</p></div>
+                    <div><img src={sass} alt="" /> <p>SASS</p></div>
+                    <div><img src={mongo} alt="" /> <p>MONGODB</p></div>
+                </div>
             </div>
-            </div>
-            <div className="redesSociales">
-                <div><img src={react} alt="" /> <p>REACT</p></div>
-                <div><img src={js} alt="" /> <p>JAVASCRIPT</p></div>
-                <div><img src={angular} alt="" /> <p>ANGULAR</p></div>
-                <div><img src={adobexd} alt="" /> <p>ADOBEXD</p></div>
-                <div><img src={python} alt="" /> <p>PYTHON</p></div>
-                <div><img src={node} alt="" /> <p>NODEJS</p></div>
-                <div><img src={git} alt="" /> <p>GIT</p></div>
-                <div><img src={sass} alt="" /> <p>SASS</p></div>
-                <div><img src={mongo} alt="" /> <p>MONGODB</p></div>
-            </div>
+            
             
             
         </div>

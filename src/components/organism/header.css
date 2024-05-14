@@ -99,12 +99,17 @@
     overflow: auto;
 }
 
-.redesSociales{
+.containerRedes{
+    width: 100%;
     display: flex;
     justify-content: center;
-    flex-wrap: wrap;
-    gap: 2em;
+}
+.redesSociales{
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(70px,1fr));  
+    gap: 1em;
     text-align: center;
+    width: 60%;
 }
 .redesSociales img{
     width: 3em;
@@ -127,10 +132,16 @@
     padding: 1em;
     padding-left: 3em;
     padding-right: 3em;
-    overflow:auto;
     margin: 1em;
 }
-
+.AboutMeContainer{
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+    justify-content: center;
+    height: calc(100vh *2);
+    overflow: auto;
+}
 .AboutMeContainerFoto{
     width: 10em;
     height: 10em;

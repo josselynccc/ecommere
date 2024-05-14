@@ -1,0 +1,37 @@
+.slider{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height:auto;
+    overflow: hidden;
+  }
+  .slider--content{
+    display: flex;
+    width: 800%;
+    height: 30%;
+    overflow: hidden;
+  }
+  .slider--section{
+    width: calc(100% / 8);
+  }
+
+  .slider--section img{
+    width: 50%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .btn{
+    display:grid;
+    grid-template-columns: repeat(2,1fr);
+  }
+
+  .btn-left, .btn-right{
+    text-align: center;
+    font-size: 50px;
+  }
+
+  .btn-left:hover, .btn-right:hover{
+    background-color:#3c3737;
+    color: #f8f3ca;
+  }
