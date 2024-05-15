@@ -46,9 +46,9 @@ const Proyectos = () => {
                         onMouseOver={() => handleMouseOver(key)}
                         onMouseLeave={handleMouseLeave}
                         >
-                        <img  src={proyectosData[key].gif} alt="" style={{borderRadius:'20px',display:'block',width:'100%', height:'100%'}} />    
-                            {lessThan600px ? (
-                            <div className="ProyectsDivInfom600">
+                        <img  src={proyectosData[key].gif} alt="" style={{objectFit:'cover',borderRadius:'20px',display:'block',width:'100%', height:'100%'}} />    
+                        {lessThan600px ? (
+                        <div className="ProyectsDivInfom600">
                                 <h2>{proyectosData[key].titulo}</h2>
                                 <p>{proyectosData[key].descCorta}</p>
                                 <div className="ProyectsDivInfo_tec">
@@ -57,8 +57,8 @@ const Proyectos = () => {
                                             {tecnologia}
                                         </p>
                                     ))}
-                                </div>
-                            </div>): ( (hoveredProyect === key) && 
+                            </div>
+                        </div>): ( (hoveredProyect === key) && 
                             <div className="ProyectsDivInfo">
                                 <h2>{proyectosData[key].titulo}</h2>
                                 <p>{proyectosData[key].descCorta}</p>
