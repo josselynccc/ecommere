@@ -45,7 +45,7 @@ const MainHeader = ({nave, planet,camara}) =>{
 
 
     return <>
-        {/* <div className='mainHeader'> */}
+        <div className='mainHeader'>
             <div className='logoAndMenu'>
                 <Logo></Logo>
                 <MainMenu 
@@ -72,7 +72,7 @@ const MainHeader = ({nave, planet,camara}) =>{
             <div className={isVisibleContact? 'Contacto visibleProyect': 'proyect ocultoProyect'}>
                 <Contacto isVisibleContact={isVisibleContact}></Contacto>
             </div>
-        {/* </div> */}
+        </div>
     </>
 }
 

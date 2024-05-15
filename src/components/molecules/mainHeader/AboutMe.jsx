@@ -36,10 +36,9 @@ const AboutMe = ({isVisibleAboutMe}) => {
                 <img className='AboutMeContainerFoto' src={foto} alt="" />
                 <p className="parrafo" ref={parrafoRef}></p>
                 <div className='videoIa'>
-                    <img src={video} alt=""/>
+                    <img src={video} alt="" style={{borderRadius:'50%',width: '20em'}} />
                 </div>
-            </div>
-            <div className='containerRedes'>
+                <div className='containerRedes'>
                 <div className="redesSociales">
                     <div><img src={react} alt="" /> <p>REACT</p></div>
                     <div><img src={js} alt="" /> <p>JAVASCRIPT</p></div>
@@ -52,6 +51,8 @@ const AboutMe = ({isVisibleAboutMe}) => {
                     <div><img src={mongo} alt="" /> <p>MONGODB</p></div>
                 </div>
             </div>
+            </div>
+            
             
             
             
