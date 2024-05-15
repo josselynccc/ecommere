@@ -23,7 +23,7 @@ const AboutMe = ({isVisibleAboutMe}) => {
         else{ 
             parrafoRef.current = null
         }
-        
+        console.log(parrafoRef.current)
     return (<>
         <div className='AboutMeContainer' >
             {/* <div className='redesSociales'>

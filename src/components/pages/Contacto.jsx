@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from 'react';
 import './Contacto.css'
 import axios from 'axios';
-import LeterforLeter from '../../helpers/LeterforLeter';
+import LeterContacto from '../../helpers/leterContact';
 const Contacto = ({isVisibleContact})=>{
     const[message,setmessage]=useState({
         nombre:"",
@@ -18,23 +18,15 @@ const Contacto = ({isVisibleContact})=>{
         const spanemailRef = useRef(null);
         const mensajeRef = useRef(null);
         const spanmensajeRef = useRef(null);
-        const letra = useRef("")
-        const letra1 = useRef("")
-        const letra2 = useRef("")
-        const letra3 = useRef("")
+        const letraRef = useRef(null)
 
         console.log(isVisibleContact)
-        if(isVisibleContact == true){
-            LeterforLeter(`CONTACTO `, letra.current)
-            LeterforLeter(`Tienes alguna pregunta `, letra1.current)
-            LeterforLeter(`o simplemente quieres saludar `, letra2.current)
-            LeterforLeter(`¡ADELANTE! `, letra3.current)
+        if(isVisibleContact){
+            LeterContacto('CONTACTO Tienes alguna pregunta o simplemente quieres saludar ¡ADELANTE! ', letraRef.current)
+            console.log(letraRef.current)
         }
         else{
-            letra.current = null 
-            letra1.current = null
-            letra2.current = null
-            letra3.current = null
+            letraRef.current = null
         }
 
         useEffect(() => {
@@ -134,10 +126,8 @@ const Contacto = ({isVisibleContact})=>{
     return <>
     <div className='containerContacto'>
         <div className='titleContact' >
-            <p ref={letra}></p>
-            <p ref={letra1}></p>
-            <p ref={letra2}></p>
-            <p ref={letra3}></p>
+            <p ref={letraRef}> CONTACTO </p>
+            <p>Tienes alguna pregunta o simplemente quieres saludar ¡ADELANTE!</p> 
         </div>
 
         <form id="formulario" className="formulario" onSubmit={handleSubmit}>

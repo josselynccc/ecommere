@@ -65,6 +65,7 @@ body{
 }
 
 .iframeContainer{
+    display: flex;
     padding-top: 3em;
     background-image: url('../../assets/galaxia.png');
     width: 100vw;
