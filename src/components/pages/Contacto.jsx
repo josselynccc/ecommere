@@ -2,8 +2,7 @@
 import { useEffect, useRef, useState } from 'react';
 import './Contacto.css'
 import axios from 'axios';
-import LeterContacto from '../../helpers/leterContact';
-const Contacto = ({isVisibleContact})=>{
+const Contacto = ()=>{
     const[message,setmessage]=useState({
         nombre:"",
         apellido:"",
@@ -18,16 +17,6 @@ const Contacto = ({isVisibleContact})=>{
         const spanemailRef = useRef(null);
         const mensajeRef = useRef(null);
         const spanmensajeRef = useRef(null);
-        const letraRef = useRef(null)
-
-        console.log(isVisibleContact)
-        if(isVisibleContact){
-            LeterContacto('CONTACTO Tienes alguna pregunta o simplemente quieres saludar ¡ADELANTE! ', letraRef.current)
-            console.log(letraRef.current)
-        }
-        else{
-            letraRef.current = null
-        }
 
         useEffect(() => {
             const nombreInput = nombreRef.current;
@@ -126,7 +115,7 @@ const Contacto = ({isVisibleContact})=>{
     return <>
     <div className='containerContacto'>
         <div className='titleContact' >
-            <p ref={letraRef}> CONTACTO </p>
+            <p> CONTACTO </p>
             <p>Tienes alguna pregunta o simplemente quieres saludar ¡ADELANTE!</p> 
         </div>
 

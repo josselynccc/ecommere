@@ -8,6 +8,8 @@ import { MoveNaveToPlanet, ZoomToPlanet } from "../../../helpers/ZoomToPlanet"
 import { Raycaster, Vector2 } from 'three'
 import Cv from "../../pages/Cv"
 import { useOrbitContext } from '../../../context/UseOrbitContext.jsx'
+import { Tween } from "@tweenjs/tween.js";
+import { Easing } from "@tweenjs/tween.js";
 
 const MainMenu = ({hideAboutMe, visibleAboutMe, hideProyect, visibleproyect,hideContact, visibleContact,nave, camara, planet}) =>{
 
@@ -17,8 +19,11 @@ const MainMenu = ({hideAboutMe, visibleAboutMe, hideProyect, visibleproyect,hide
     const [isVisibleDivPlanet, setisVisibleDivPlanet] = useState(false)
     const lessThan600px = useMediaQuery('(max-width: 600px)')
     const {setIsOrbitVisible} = useOrbitContext()
+    
+    // console.log(planet)
 
     useEffect(()=>{
+        
         const handlePlanetClick = (event) => {
 
             const planetObj = planet[0].planetObj
@@ -64,22 +69,52 @@ const MainMenu = ({hideAboutMe, visibleAboutMe, hideProyect, visibleproyect,hide
         }
     };
 
-    useEffect(() => {
-        if(planet){handleZoomPlanet();
+     useEffect(() => {
+         if(planet && nave){handleZoomPlanet();
+         }
+        
+     }, []);
+
+     const handleZoomPlanet = async ()=>{
+        
+        try {
+            const initialNavePosition = await MoveNaveToPlanet(nave, planet)
+            const initialZoomPosition = await ZoomToPlanet(camara, planet)
+
+            await new Promise(resolve => setTimeout(resolve, 2000))
+            setisVisibleDivPlanet(true)
+            await new Promise(resolve => setTimeout(resolve, 700))
+            new Tween(nave[0].position)
+            .to({
+                x: initialNavePosition.x,
+                y: initialNavePosition.y,
+                z: initialNavePosition.z
+            }, 1000)
+            .easing(Easing.Quadratic.InOut)
+            .start();
+
+        // Regresar la cámara a su posición inicial
+            new Tween(camara.position) 
+                .to({
+                    x: initialZoomPosition.x, 
+                    y: initialZoomPosition.y,
+                    z: initialZoomPosition.z
+                }, 1000)
+                .easing(Easing.Quadratic.InOut)
+                .onUpdate(() => {
+                    camara.lookAt(0, 0, 0);
+                  })
+                .start(); 
+            }catch (error) {
+            console.error(error)
         }
         
-    }, []);
-
-    const handleZoomPlanet = ()=>{
-        ZoomToPlanet(camara, planet)
-        MoveNaveToPlanet(nave,planet)
-        console.log("hola")
     }
 
     const handlePlanetOrbit = ()=>{
         setIsOrbitVisible(false)
-        setTimeout(()=>{setIsOrbitVisible(true)},20000)
-        console.log({setIsOrbitVisible})
+        setTimeout(()=>{setIsOrbitVisible(true)},5000)
+        console.log('ORBIT VISIBLE',{setIsOrbitVisible})
     }
 
     

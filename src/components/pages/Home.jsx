@@ -12,6 +12,7 @@ import {PointLightStar,AmbientLightScene, PointLightScene } from '../../helpers/
 import {CreateOrbitPlanet} from '../../helpers/CreateOrbitaPlanet.js'
 import {CreateNaveEspacial} from '../../helpers/CreateNaveEspacial.js'
 import MainHeader from '../organism/MainHeader.jsx'
+import { useOrbitContext } from '../../context/UseOrbitContext.jsx'
 const Home = () =>{
     
     const planetsRef = useRef([]);
@@ -20,7 +21,11 @@ const Home = () =>{
     const scene = new Scene()
     const camara = CreateCamera({x:0, y:50, z:250})
     const naveRef = useRef([])
+    const requestRef = useRef();
+
+    const {isOrbitVisible} = useOrbitContext()
     
+
     useEffect(()=>{
 
         if (rendererRef.current) {
@@ -119,7 +124,9 @@ const Home = () =>{
         //OBJETO NAVE
         const objNave = CreateNaveEspacial(scene, {x:0,y:20,z:200})
         naveRef.current.push(objNave)
-        console.log(naveRef)
+   
+
+    
 
         //ANIMATE
         const clock = new Clock();
@@ -128,19 +135,6 @@ const Home = () =>{
             LimitZoom(camara,cuboScene);
 
             light.rotation.y += 0.05 * deltaTime
-
-   
-            planetsRef.current.forEach((planetData, index) => {
-                
-                    const planet = planetData.planetObj;
-                    const Speed = planetData.rotationSpeed
-                    const orbit = orbitsRef.current[index]
-                    const currentTime = Date.now() * 0.00001 * Speed
-                    const position = orbit.calculatePosition(currentTime);
-                    planet.position.copy(position);
-                
-            })
-            
 
             planetsRef.current.forEach((planetData) => {
                 const planet = planetData.planetObj
@@ -185,6 +179,32 @@ const Home = () =>{
         }
         
     },[])
+
+    const animates = () => {
+
+
+        if (isOrbitVisible) {
+            planetsRef.current.forEach((planetData, index) => {
+            
+                const planet = planetData.planetObj;
+                const Speed = planetData.rotationSpeed
+                const orbit = orbitsRef.current[index]
+                const currentTime = Date.now() * 0.00001 * Speed
+                const position = orbit.calculatePosition(currentTime);
+                planet.position.copy(position);
+            
+            })   
+        }
+        requestRef.current = requestAnimationFrame(animates)
+    
+    }
+    
+    useEffect(() => {
+        requestRef.current = requestAnimationFrame(animates);
+        return () => {
+            cancelAnimationFrame(requestRef.current);
+        };
+    }, [isOrbitVisible]);
     
 
     return <>
