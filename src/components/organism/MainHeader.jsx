@@ -7,7 +7,7 @@ import {  useState } from 'react'
 import Proyectos from '../pages/Proyectos'
 import Contacto from '../pages/Contacto'
 
-const MainHeader = ({nave, planet,camara}) =>{
+const MainHeader = ({nave, planet,camara,scene}) =>{
     if(planet){
         console.log(planet)
     }
@@ -47,7 +47,11 @@ const MainHeader = ({nave, planet,camara}) =>{
     return <>
         <div className='mainHeader'>
             <div className='logoAndMenu'>
-                <Logo></Logo>
+                
+                <Logo 
+                hideAboutMe={hideAboutMe}
+                hideProyect ={hideProyect}
+                hideContact = {hideContact}></Logo>
                 <MainMenu 
                 hideAboutMe={hideAboutMe}
                 visibleAboutMe={VisibleAboutMe}
@@ -58,7 +62,9 @@ const MainHeader = ({nave, planet,camara}) =>{
                 visibleContact={visibleContact}
                 nave = {nave}
                 camara = {camara}
-                planet = {planet}></MainMenu>
+                planet = {planet}
+                scene = {scene}></MainMenu>
+        
             </div>
             
             <div className={ isVisibleAboutMe ? 'aboutMe VisibleAboutMeContainer' : 'aboutMe OcultoAboutMeContainer'}>

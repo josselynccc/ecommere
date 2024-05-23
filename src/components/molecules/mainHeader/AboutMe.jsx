@@ -14,18 +14,29 @@ import LeterforLeter from '../../../helpers/LeterforLeter'
 import video from '../../../assets/Avatar-1-unscreen.gif'
 
 const AboutMe = ({isVisibleAboutMe}) => {
-    const parrafoRef = useRef(null)
-    console.log(isVisibleAboutMe)
+    const parrafoRef = useRef(null);
 
-    useEffect(()=>{
-        if (isVisibleAboutMe == true) {
-            LeterforLeter("¡Bienvenido a mi mundo digital! Soy Josselyn Cortez, una apasionada Frontend Developer con una visión creativa y una pasión por la construcción de experiencias web cautivadoras. En mi viaje por el desarrollo web, he combinado mi amor por el diseño con mi habilidad para codificar, creando sitios web funcionales y visualmente atractivas. Explora las habilidades y tecnologías que domino como Frontend Developer. Desde HTML, CSS y JavaScript hasta frameworks como React y Angular, estoy constantemente aprendiendo y perfeccionando mi oficio para ofrecer las mejores soluciones a mis clientes.", parrafoRef.current)
+    useEffect(() => {
+        let cleanUpAnimation;
+        if (isVisibleAboutMe && parrafoRef.current) {
+            parrafoRef.current.textContent = '';
+            cleanUpAnimation = LeterforLeter(
+                "¡Bienvenido a mi mundo digital! Soy Josselyn Cortez, una apasionada Frontend Developer con una visión creativa y una pasión por la construcción de experiencias web cautivadoras. En mi viaje por el desarrollo web, he combinado mi amor por el diseño con mi habilidad para codificar, creando sitios web funcionales y visualmente atractivas. Explora las habilidades y tecnologías que domino como Frontend Developer. Desde HTML, CSS y JavaScript hasta frameworks como React y Angular, estoy constantemente aprendiendo y perfeccionando mi oficio para ofrecer las mejores soluciones a mis clientes.",
+                parrafoRef.current
+            )
+        } else if (parrafoRef.current) {
+            parrafoRef.current.textContent = ''
         }
-        else{ 
-            parrafoRef.current = null
+
+        return () => {
+            if (cleanUpAnimation) {
+                cleanUpAnimation();
+            }
         }
-    }, [])
-        
+    }, [isVisibleAboutMe]);
+    
+
+
     return (<>
         <div className='AboutMeContainer' >
             {/* <div className='redesSociales'>

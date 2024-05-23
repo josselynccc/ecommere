@@ -1,6 +1,6 @@
 import {Mesh,Clock,MeshStandardMaterial,Color, WebGLRenderer, Scene, SphereGeometry, BackSide, Vector3 } from 'three'
 import { colorTextureStar,colorTextureScene,colorTexture,cloudTexture,colorTextureMercury,colorTextureVenus,colorTextureMarte,colorTextureJupiter,colorTextureSaturno,colorTextureUrano, colorTextureNeptuno, colorTextureSol } from '../../constants/Texturas.js'
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls"
+import { ArcballControls } from 'three/addons/controls/ArcballControls.js'
 import './Home.css'
 import {CreatePlanet} from "../../helpers/CreatePlanet.js"
 import LimitZoom from '../../helpers/LimitZoom.js'
@@ -13,6 +13,7 @@ import {CreateOrbitPlanet} from '../../helpers/CreateOrbitaPlanet.js'
 import {CreateNaveEspacial} from '../../helpers/CreateNaveEspacial.js'
 import MainHeader from '../organism/MainHeader.jsx'
 import { useOrbitContext } from '../../context/UseOrbitContext.jsx'
+
 const Home = () =>{
     
     const planetsRef = useRef([]);
@@ -111,11 +112,16 @@ const Home = () =>{
         renderer.setPixelRatio(Math.min(window.devicePixelRatio), 2)
 
         //RESIZE
-        window.addEventListener("resize", Resize(camara,renderer))
+        window.addEventListener("resize", Resize(camara, renderer), { passive: true })
         
         //CREANDO EL CONTROLS 
-        const controls = new OrbitControls( camara, document.body)
+        const controls = new ArcballControls( camara, renderer.domElement, scene )
+        controls.addEventListener( 'change', function () {
+            renderer.render( scene, camara );
+        } );
+        controls.setGizmosVisible(false)
         controls.update();
+
 
         const renderScene = () =>{
             renderer.render(scene, camara)
@@ -207,20 +213,22 @@ const Home = () =>{
     }, [isOrbitVisible]);
     
 
+
     return <>
         {planetsRef.current && naveRef.current &&(
             <MainHeader 
                 nave = {naveRef.current}
                 planet={planetsRef.current}
                 camara={camara}
+                scene = {scene}
             />
         )}
         
 
-        {/* <div className='creditos'>
+        <div className='creditos'>
             &quot;Astronauta&quot; (https://skfb.ly/6GBvp) by Mora is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/). <br />
             &quot;Nave Espacial/Spacecraft&quot; (https://skfb.ly/6wCFG) by MatiasG729 is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
-        </div> */}
+        </div>
     </>
 }
 

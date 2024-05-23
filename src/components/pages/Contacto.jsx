@@ -2,7 +2,8 @@
 import { useEffect, useRef, useState } from 'react';
 import './Contacto.css'
 import axios from 'axios';
-const Contacto = ()=>{
+import LeterforLeter from '../../helpers/LeterforLeter'
+const Contacto = ({isVisibleContact})=>{
     const[message,setmessage]=useState({
         nombre:"",
         apellido:"",
@@ -112,11 +113,43 @@ const Contacto = ()=>{
             })
             .catch(e=>{console.log(e)})
         };
+        
+        const parrafoRef = useRef(null);
+        const parrafoRef1 = useRef(null);
+        useEffect(() => {
+            let cleanUpAnimation
+            let cleanUpAnimation1
+            if (isVisibleContact && parrafoRef.current) {
+                parrafoRef.current.textContent = '';
+                cleanUpAnimation = LeterforLeter(
+                    "CONTACTO",
+                    parrafoRef.current
+                )
+
+                cleanUpAnimation1 =LeterforLeter(
+                    "Tienes alguna pregunta o simplemente quieres saludar ¡ADELANTE!",
+                    parrafoRef1.current
+                )
+            } else if (parrafoRef.current && parrafoRef1.current) {
+                parrafoRef.current.textContent = ''
+                parrafoRef1.current.textContent = ''
+            }
+    
+            return () => {
+                if (cleanUpAnimation) {
+                    cleanUpAnimation();
+                }
+                if (cleanUpAnimation1) {
+                    cleanUpAnimation();
+                }
+            }
+        }, [isVisibleContact]);
+
     return <>
     <div className='containerContacto'>
         <div className='titleContact' >
-            <p> CONTACTO </p>
-            <p>Tienes alguna pregunta o simplemente quieres saludar ¡ADELANTE!</p> 
+            <p ref={parrafoRef}></p>
+            <p ref={parrafoRef1}></p>
         </div>
 
         <form id="formulario" className="formulario" onSubmit={handleSubmit}>

@@ -2,13 +2,17 @@ import { Vector3 } from "three"
 import { Tween, update } from "@tweenjs/tween.js";
 import { Easing } from "@tweenjs/tween.js";
 
-export const MoveNaveToPlanet  = (nave, planet)=>{
+export const MoveNaveToPlanet  = (nave, planet, num)=>{
   return new Promise((resolve,reject)=>{
-    if(planet[0]) {
+    if(planet[num]) {
     
-      const planetObj = planet[0].planetObj
+      const planetObj = planet[num].planetObj
       const naveObj = nave[0]
-  
+
+      if (!naveObj || !naveObj.position) {
+        return reject("Invalid nave object");
+      }
+
       const planetPosition = new Vector3()
       planetObj.getWorldPosition(planetPosition)
   
@@ -49,11 +53,15 @@ const animate = () => {
 
 animate();
 
-export const ZoomToPlanet = (camara, planet) => {
+export const ZoomToPlanet = (camara, planet, num) => {
   return new Promise((resolve, reject) => {
-    if (planet[0]) {
-      const planetObj = planet[0].planetObj;
+    if (planet[num]) {
+      const planetObj = planet[num].planetObj;
 
+      if (!camara || !camara.position) {
+        return reject("Invalid camera object");
+      }
+      
       const planetPosition = new Vector3();
       planetObj.getWorldPosition(planetPosition);
 

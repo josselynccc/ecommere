@@ -10,13 +10,14 @@ import Cv from "../../pages/Cv"
 import { useOrbitContext } from '../../../context/UseOrbitContext.jsx'
 import { Tween } from "@tweenjs/tween.js";
 import { Easing } from "@tweenjs/tween.js";
+import Proyectos from '../../pages/Proyectos.jsx'
 
-const MainMenu = ({hideAboutMe, visibleAboutMe, hideProyect, visibleproyect,hideContact, visibleContact,nave, camara, planet}) =>{
+const MainMenu = ({hideAboutMe, visibleAboutMe, hideProyect,hideContact, visibleContact,nave, camara, planet, scene}) =>{
 
     const divRef = useRef(null)
-    const divPlanetRef = useRef(null)
     const [isVisible, setIsVisible] = useState(false)
-    const [isVisibleDivPlanet, setisVisibleDivPlanet] = useState(false)
+    const [isVisibleDivPlanet0, setisVisibleDivPlanet0] = useState(false)
+    const [isVisibleDivPlanet1, setisVisibleDivPlanet1] = useState(false)
     const lessThan600px = useMediaQuery('(max-width: 600px)')
     const {setIsOrbitVisible} = useOrbitContext()
     
@@ -24,9 +25,9 @@ const MainMenu = ({hideAboutMe, visibleAboutMe, hideProyect, visibleproyect,hide
 
     useEffect(()=>{
         
-        const handlePlanetClick = (event) => {
+        const handlePlanetClick = (event, planet_num) => {
 
-            const planetObj = planet[0].planetObj
+            const planetObj = planet[planet_num].planetObj
             
             if(planet[0]){
                 const mouse = new Vector2();
@@ -38,22 +39,39 @@ const MainMenu = ({hideAboutMe, visibleAboutMe, hideProyect, visibleproyect,hide
                 const intersects = raycaster.intersectObject(planetObj);
     
                 if (intersects.length > 0) {
-                    setisVisibleDivPlanet(preState => !preState)
-                    console.log(isVisibleDivPlanet)
+                    switch (planet_num) {
+                        case 0:
+                            setisVisibleDivPlanet1(false)
+                            setisVisibleDivPlanet0(preState => !preState)
+                            break;
+
+                        case 1:
+                            setisVisibleDivPlanet0(false)
+                            setisVisibleDivPlanet1(preState => !preState)
+                            break;
+                    
+                        default:
+                            break;
+                    }
                 }
             }
             
         }
-
-        document.addEventListener("click", handlePlanetClick);
+        const createClickHandler = (planet_num) => (event) => handlePlanetClick(event, planet_num);
+        
+        document.addEventListener("click", createClickHandler(0));
+        document.addEventListener("click", createClickHandler(1));
+        document.addEventListener("click", createClickHandler(2));
         return () => {
-            document.removeEventListener("click", handlePlanetClick);
+            document.removeEventListener("click", createClickHandler(0));
+            document.removeEventListener("click", createClickHandler(1));
+            document.removeEventListener("click", createClickHandler(2));
         };
         
     },[])
     
     const hidecv = () =>{
-        setisVisibleDivPlanet(false)
+        setisVisibleDivPlanet0(false)
     }
 
     const toggleMenu = ()=>{
@@ -75,14 +93,25 @@ const MainMenu = ({hideAboutMe, visibleAboutMe, hideProyect, visibleproyect,hide
         
      }, []);
 
-     const handleZoomPlanet = async ()=>{
+     const handleZoomPlanet = async (num)=>{
         
         try {
-            const initialNavePosition = await MoveNaveToPlanet(nave, planet)
-            const initialZoomPosition = await ZoomToPlanet(camara, planet)
+            if(planet[num] && nave){
+                const initialNavePosition = await MoveNaveToPlanet(nave, planet, num)
+            const initialZoomPosition = await ZoomToPlanet(camara, planet, num)
 
-            await new Promise(resolve => setTimeout(resolve, 2000))
-            setisVisibleDivPlanet(true)
+            await new Promise(resolve => setTimeout(resolve, 1500))
+            switch (num) {
+                case 0:
+                    setisVisibleDivPlanet0(true)
+                    break;
+                case 1:
+                    setisVisibleDivPlanet1(true)
+                    break;
+                default:
+                    break;
+            }
+            
             await new Promise(resolve => setTimeout(resolve, 700))
             new Tween(nave[0].position)
             .to({
@@ -104,7 +133,9 @@ const MainMenu = ({hideAboutMe, visibleAboutMe, hideProyect, visibleproyect,hide
                 .onUpdate(() => {
                     camara.lookAt(0, 0, 0);
                   })
-                .start(); 
+                .start();
+            }
+             
             }catch (error) {
             console.error(error)
         }
@@ -132,24 +163,32 @@ const MainMenu = ({hideAboutMe, visibleAboutMe, hideProyect, visibleproyect,hide
                         hideProyect()
                         hideContact()
                         toggleMenu()
+                        setisVisibleDivPlanet1(false)
+                        setisVisibleDivPlanet0(false)
+                        scene.classList.add('disable-pointer-events')
+                       
                       }}>Sobre Mi</a></li>
                     <li><a style={{ color: '#9C34C2',textDecoration: 'none' }} to="/cv"
                     onClick={() => { 
                         hideAboutMe() 
-                        handleZoomPlanet()
+                        handleZoomPlanet(0)
                         handlePlanetOrbit() 
                         handleClick()
                         hideProyect()
                         hideContact()
                         toggleMenu()
+                        setisVisibleDivPlanet1(false)
+                        setisVisibleDivPlanet0(false)
                       }}>CV</a></li>
                     <li><a style={{ color: '#9C34C2',textDecoration: 'none' }} to="/aboutMe" 
                     onClick={() => { 
                         hideAboutMe() 
                         hidecv()
-                        visibleproyect()
+                        handleZoomPlanet(1)
                         hideContact()
                         toggleMenu()
+                        setisVisibleDivPlanet1(false)
+                        setisVisibleDivPlanet0(false)
                       }}>Proyectos</a></li>
                     <li><a style={{ color: '#9C34C2',textDecoration: 'none' }} to="/aboutMe"
                     onClick={() => { 
@@ -158,18 +197,21 @@ const MainMenu = ({hideAboutMe, visibleAboutMe, hideProyect, visibleproyect,hide
                         hideProyect()
                         visibleContact()
                         toggleMenu()
+                        setisVisibleDivPlanet1(false)
+                        setisVisibleDivPlanet0(false)
                       }}>Contacto</a></li>
                 </ul>
             </nav>
     </div>
     <div ref={divRef} className="miDiv"><p>Aterriza en el planeta</p></div>
    
-    <div ref={divPlanetRef} className={isVisibleDivPlanet? "miDiv active" : "miDiv"} >
-        <div className='DivCurriculum'>
-            <Cv hidecv = {hidecv}></Cv>
-        </div>
-
+    <div className={isVisibleDivPlanet0? "miDiv active" : "miDiv"} >
+        <Cv hidecv = {hidecv}></Cv>
     </div>
+
+    {isVisibleDivPlanet1 && (
+        <div className='proyectDiv'><Proyectos></Proyectos></div>
+    )}
         
     </>
 }

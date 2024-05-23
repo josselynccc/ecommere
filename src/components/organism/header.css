@@ -6,17 +6,30 @@
     top: 0px;
     align-items: center;
     width: 100vw;
+    height: auto;
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    position: fixed;
+    flex-direction: column;
+    position: absolute;
     background-image: url('../../assets/star_fondo.png');
     background-size: cover;
     background-repeat: no-repeat;
-    opacity: 0.8;
+    overflow: auto;
 }
+.proyectDiv{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: url('../../assets/star_fondo.png');
+    background-size: cover;
+    background-repeat: no-repeat;
 
+    z-index: 10;
+    margin-top: 1em;
+}
 .logo{
+    top: 0;
     width: 8em;
 }
 
@@ -74,7 +87,12 @@
 }
 
 /* ABOUT ME */
-
+.menu_icon{
+    position: fixed;
+    z-index: 1000;
+    margin-top: 2em;
+    margin-left: 80%;
+}
 
 .containerRedes{
     width: 100%;
@@ -102,17 +120,21 @@
 
 /* MENU */
 .Menu{
+    position: fixed;
     z-index: 1000;
     display: flex;
-    top: 6rem;
+    top: 7rem;
     flex-direction: column;
     gap: 1em;
     flex-wrap: wrap;
     font-size: 18px;
-    text-align: center;
+    align-items: center;
+    justify-content: center;
     padding-left:0.5em;
     padding-right:0.5em;
     list-style-type: none;
+    width: 100%;
+    background-image: url('../../assets/star_fondo.png');
 }
 
 .Menu nav ul{
@@ -143,7 +165,6 @@
 .miDiv {
     z-index: 100;
     text-align: center;
-    position: absolute;
     top: 100%;
     left: -100%;
     background-color: #9C34C2;
@@ -153,8 +174,7 @@
   .miDiv.active {
     z-index: 100;
     text-align: center;
-    position: absolute;
-    top: 100%;
+    margin-top: 8em;
     background-color: #9C34C2;
     display: none;
     left: 0;
@@ -191,6 +211,7 @@
         background-repeat: no-repeat;
         opacity: 0.8;
         overflow: auto;
+        z-index: 100;
     }
     .MeContainer{
         display: flex;
@@ -226,6 +247,15 @@
     .videoIa img{
         width: 30em;
     }
+
+    .containerlogo{
+        margin: 0;
+        z-index: 1000;
+        position: fixed;
+        width: 100%;
+        left: 1em;
+        background-image: url('../../assets/star_fondo.png');
+    }
 }
 
 @media (min-width: 600px) and (max-width: 1200px) {
@@ -240,6 +270,7 @@
     }
     
     .aboutMe{
+        z-index: 100;
         margin-top: 8em;
         width: 100vw;
         height: 100%;
@@ -288,6 +319,13 @@
         flex-direction: column;
         justify-content:center;
     }
+    .containerlogo{
+        width: 100%;
+        z-index: 1000;
+        position: fixed;
+        text-align: center;
+        background-image: url('../../assets/star_fondo.png');
+    }
   }
 
 @media (min-width: 1200px) {
@@ -302,6 +340,7 @@
     }
     
     .aboutMe{
+        z-index: 100;
         margin-top: 4em;
         width: 100vw;
         height: 100%;
@@ -353,5 +392,17 @@
         justify-content: center;
         overflow: auto;
     }
+    .containerlogo{
+        width: 100%;
+        z-index: 1000;
+        position: fixed;
+        text-align: center;
+        background-image: url('../../assets/star_fondo.png');
+    }
 
   }
+
+
+.disable-pointer-events {
+    pointer-events: none;
+}

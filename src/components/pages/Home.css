@@ -10,10 +10,11 @@ body{
 .creditos{
     font-size: 10px;
     display: flex;
-    justify-content: center;
     bottom: 0;
-    color: bisque;
+    justify-content: center;
     position: absolute;
+    z-index: 1;
+    color: bisque;
 }
 
 .stars-container{

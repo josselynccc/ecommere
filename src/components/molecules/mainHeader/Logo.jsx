@@ -1,8 +1,15 @@
 import logo from '../../../assets/logo.png'
 import '../../organism/header.css'
-const Logo = () =>{
+const Logo = ({hideAboutMe,hideProyect,hideContact}) =>{
     return <>
-        <img className='logo' src={logo} alt=""/>
+    <div className='containerlogo'>
+        <img className='logo' onClick={()=>{
+                hideAboutMe()
+                hideProyect()
+                hideContact()
+            }} src={logo} alt=""/>
+    </div>
+        
     </>
 }
 export default Logo
