@@ -10,5 +10,5 @@ export default defineConfig({
       include: /\.json$/, // Esto asegura que los archivos JSON también se manejen
     })
   ],
-  assetsInclude: ['**/*.glb', '**/*.pdf', '**/*.mp3'],
+  assetsInclude: ['**/*.glb', '**/*.pdf', '**/*.mp3', "**/*.mpeg"],
 })

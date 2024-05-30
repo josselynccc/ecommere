@@ -76,10 +76,9 @@ const Proyectos = () => {
                 </div>
             </div>
             {selectedProyect &&  (
-            <div>
+            <div className="ProyectsInformation">
                         {visibleInfoProyect &&
                         (
-                        <div className="ProyectsInformation">
                             <div className='DivProyectsInformation_key' key={selectedProyect}>
                             <div className="ProyectsInformationBack">
                                 <img onClick={handleBack} src={icon_back} alt="" style={{borderRadius:'50%', width:'35', height:'35px'}}/>
@@ -110,7 +109,6 @@ const Proyectos = () => {
                                 <img src={telefono} alt="" style={{borderRadius:'50%', width:'35', height:'35px'}} />
             
                             </div>
-                        </div>
                         </div>
                         )
                         }

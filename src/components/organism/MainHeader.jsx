@@ -45,9 +45,7 @@ const MainHeader = ({nave, planet,camara,scene}) =>{
 
 
     return <>
-        <div className='mainHeader'>
             <div className='logoAndMenu'>
-                
                 <Logo 
                 hideAboutMe={hideAboutMe}
                 hideProyect ={hideProyect}
@@ -66,7 +64,7 @@ const MainHeader = ({nave, planet,camara,scene}) =>{
                 scene = {scene}></MainMenu>
         
             </div>
-            
+
             <div className={ isVisibleAboutMe ? 'aboutMe VisibleAboutMeContainer' : 'aboutMe OcultoAboutMeContainer'}>
                 <AboutMe isVisibleAboutMe={isVisibleAboutMe}></AboutMe>
             </div>
@@ -78,7 +76,6 @@ const MainHeader = ({nave, planet,camara,scene}) =>{
             <div className={isVisibleContact? 'Contacto visibleProyect': 'proyect ocultoProyect'}>
                 <Contacto isVisibleContact={isVisibleContact}></Contacto>
             </div>
-        </div>
     </>
 }
 
