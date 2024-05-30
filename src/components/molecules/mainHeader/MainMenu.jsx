@@ -2,98 +2,95 @@
 
 import '../../organism/header.css'
 import menu from '../../../assets/menu.png'
-import { useEffect, useRef, useState } from "react"
+import { useCallback, useEffect,  useState } from "react"
 import { useMediaQuery } from '@react-hook/media-query'
 import { MoveNaveToPlanet, ZoomToPlanet } from "../../../helpers/ZoomToPlanet"
 import { Raycaster, Vector2 } from 'three'
 import Cv from "../../pages/Cv"
+import Creditos from '../../pages/Creditos.jsx'
 import { useOrbitContext } from '../../../context/UseOrbitContext.jsx'
 import { Tween } from "@tweenjs/tween.js";
 import { Easing } from "@tweenjs/tween.js";
 import Proyectos from '../../pages/Proyectos.jsx'
 
-const MainMenu = ({hideAboutMe, visibleAboutMe, hideProyect,hideContact, visibleContact,nave, camara, planet, scene}) =>{
+const MainMenu = ({hideAboutMe, visibleAboutMe, hideProyect,hideContact, visibleContact,nave, camara, planet, isVisibleAboutMe, isVisibleContact}) =>{
 
-    const divRef = useRef(null)
     const [isVisible, setIsVisible] = useState(false)
     const [isVisibleDivPlanet0, setisVisibleDivPlanet0] = useState(false)
     const [isVisibleDivPlanet1, setisVisibleDivPlanet1] = useState(false)
+    const [isVisibleDivPlanet2, setisVisibleDivPlanet2] = useState(false)
     const lessThan600px = useMediaQuery('(max-width: 600px)')
     const {setIsOrbitVisible} = useOrbitContext()
     
     // console.log(planet)
 
-    useEffect(()=>{
-        
-        const handlePlanetClick = (event, planet_num) => {
+    const handlePlanetClick = useCallback((event, planet_num) => {
+        if (isVisibleAboutMe || isVisibleContact) return;
 
-            const planetObj = planet[planet_num].planetObj
-            
-            if(planet[0]){
-                const mouse = new Vector2();
-                const raycaster = new Raycaster();
-                mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-                mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-                raycaster.setFromCamera(mouse, camara);
-    
-                const intersects = raycaster.intersectObject(planetObj);
-    
-                if (intersects.length > 0) {
-                    switch (planet_num) {
-                        case 0:
-                            setisVisibleDivPlanet1(false)
-                            setisVisibleDivPlanet0(preState => !preState)
-                            break;
+        if (planet) {
+            const planetObj = planet[planet_num].planetObj;
+            const mouse = new Vector2();
+            const raycaster = new Raycaster();
+            mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+            mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+            raycaster.setFromCamera(mouse, camara);
 
-                        case 1:
-                            setisVisibleDivPlanet0(false)
-                            setisVisibleDivPlanet1(preState => !preState)
-                            break;
-                    
-                        default:
-                            break;
-                    }
+            const intersects = raycaster.intersectObject(planetObj);
+
+            if (intersects.length > 0) {
+                switch (planet_num) {
+                    case 0:
+                        setisVisibleDivPlanet1(false);
+                        setisVisibleDivPlanet0(prevState => !prevState);
+                        setisVisibleDivPlanet2(false);
+                        break;
+                    case 1:
+                        setisVisibleDivPlanet0(false);
+                        setisVisibleDivPlanet1(prevState => !prevState);
+                        setisVisibleDivPlanet2(false);
+                        break;
+                    case 4:
+                        setisVisibleDivPlanet0(false);
+                        setisVisibleDivPlanet1(false);
+                        setisVisibleDivPlanet2(prevState => !prevState);
+                        break;
+                    default:
+                        break;
                 }
             }
-            
         }
-        const createClickHandler = (planet_num) => (event) => handlePlanetClick(event, planet_num);
-        
-        document.addEventListener("click", createClickHandler(0));
-        document.addEventListener("click", createClickHandler(1));
-        document.addEventListener("click", createClickHandler(2));
+    }, [isVisibleContact,isVisibleAboutMe, camara, planet]);
+
+    useEffect(() => {
+        const handleClick0 = (event) => handlePlanetClick(event, 0);
+        const handleClick1 = (event) => handlePlanetClick(event, 1);
+        const handleClick2 = (event) => handlePlanetClick(event, 4);
+
+        document.addEventListener("click", handleClick0);
+        document.addEventListener("click", handleClick1);
+        document.addEventListener("click", handleClick2);
+
         return () => {
-            document.removeEventListener("click", createClickHandler(0));
-            document.removeEventListener("click", createClickHandler(1));
-            document.removeEventListener("click", createClickHandler(2));
+            document.removeEventListener("click", handleClick0);
+            document.removeEventListener("click", handleClick1);
+            document.removeEventListener("click", handleClick2);
         };
-        
-    },[])
-    
+    }, [handlePlanetClick])
+
     const hidecv = () =>{
         setisVisibleDivPlanet0(false)
+    }
+    const hidecreditos = () =>{
+        setisVisibleDivPlanet2(false)
     }
 
     const toggleMenu = ()=>{
         setIsVisible(preState => !preState)
     }
 
-    const handleClick = () => {
-        if (divRef.current) {
-            divRef.current.classList.add('active');
-            setTimeout(() => {
-                divRef.current.classList.remove('active');
-            }, 3000)
-        }
-    };
+  
 
-     useEffect(() => {
-         if(planet && nave){handleZoomPlanet();
-         }
-        
-     }, []);
-
-     const handleZoomPlanet = async (num)=>{
+    const handleZoomPlanet = async (num)=>{
         
         try {
             if(planet[num] && nave){
@@ -107,6 +104,9 @@ const MainMenu = ({hideAboutMe, visibleAboutMe, hideProyect,hideContact, visible
                     break;
                 case 1:
                     setisVisibleDivPlanet1(true)
+                    break;
+                case 4:
+                    setisVisibleDivPlanet2(true)
                     break;
                 default:
                     break;
@@ -142,6 +142,14 @@ const MainMenu = ({hideAboutMe, visibleAboutMe, hideProyect,hideContact, visible
         
     }
 
+     useEffect(() => {
+         if(planet && nave){handleZoomPlanet();
+         }
+        
+     }, [nave,planet]);
+
+     
+
     const handlePlanetOrbit = ()=>{
         setIsOrbitVisible(false)
         setTimeout(()=>{setIsOrbitVisible(true)},5000)
@@ -163,9 +171,7 @@ const MainMenu = ({hideAboutMe, visibleAboutMe, hideProyect,hideContact, visible
                         hideProyect()
                         hideContact()
                         toggleMenu()
-                        setisVisibleDivPlanet1(false)
-                        setisVisibleDivPlanet0(false)
-                        scene.classList.add('disable-pointer-events')
+                        hidecreditos()
                        
                       }}>Sobre Mi</a></li>
                     <li><a style={{ color: '#9C34C2',textDecoration: 'none' }} to="/cv"
@@ -173,22 +179,20 @@ const MainMenu = ({hideAboutMe, visibleAboutMe, hideProyect,hideContact, visible
                         hideAboutMe() 
                         handleZoomPlanet(0)
                         handlePlanetOrbit() 
-                        handleClick()
                         hideProyect()
                         hideContact()
                         toggleMenu()
-                        setisVisibleDivPlanet1(false)
-                        setisVisibleDivPlanet0(false)
+                        hidecreditos()
                       }}>CV</a></li>
                     <li><a style={{ color: '#9C34C2',textDecoration: 'none' }} to="/aboutMe" 
                     onClick={() => { 
                         hideAboutMe() 
                         hidecv()
                         handleZoomPlanet(1)
+                        handlePlanetOrbit()
                         hideContact()
                         toggleMenu()
-                        setisVisibleDivPlanet1(false)
-                        setisVisibleDivPlanet0(false)
+                        hidecreditos()
                       }}>Proyectos</a></li>
                     <li><a style={{ color: '#9C34C2',textDecoration: 'none' }} to="/aboutMe"
                     onClick={() => { 
@@ -197,13 +201,21 @@ const MainMenu = ({hideAboutMe, visibleAboutMe, hideProyect,hideContact, visible
                         hideProyect()
                         visibleContact()
                         toggleMenu()
-                        setisVisibleDivPlanet1(false)
-                        setisVisibleDivPlanet0(false)
+                        hidecreditos()
                       }}>Contacto</a></li>
+                    <li><a style={{ color: '#9C34C2',textDecoration: 'none' }} to="/cv"
+                    onClick={() => { 
+                        hideAboutMe() 
+                        hidecv()
+                        handleZoomPlanet(4)
+                        handlePlanetOrbit()
+                        hideProyect()
+                        hideContact()
+                        toggleMenu()
+                      }}>Creditos</a></li>
                 </ul>
             </nav>
     </div>
-    <div ref={divRef} className="miDiv"><p>Aterriza en el planeta</p></div>
    
     <div className={isVisibleDivPlanet0? "miDiv active" : "miDiv"} >
         <Cv hidecv = {hidecv}></Cv>
@@ -211,6 +223,10 @@ const MainMenu = ({hideAboutMe, visibleAboutMe, hideProyect,hideContact, visible
 
     {isVisibleDivPlanet1 && (
         <div className='proyectDiv'><Proyectos></Proyectos></div>
+    )}
+
+    {isVisibleDivPlanet2 && (
+        <Creditos></Creditos>
     )}
         
     </>

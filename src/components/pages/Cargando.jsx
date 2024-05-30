@@ -148,10 +148,6 @@ const Cargando = ()=>{
         <div className="frase">
             <p ref={letra}></p>
         </div>
-
-        <div className='creditos'>
-            &quot;Nave Espacial/Spacecraft&quot; (https://skfb.ly/6wCFG) by MatiasG729 is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
-        </div>
     </>
 }
 

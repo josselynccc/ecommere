@@ -54,6 +54,7 @@ const MainHeader = ({nave, planet,camara,scene}) =>{
                 hideAboutMe={hideAboutMe}
                 visibleAboutMe={VisibleAboutMe}
                 isVisibleAboutMe={isVisibleAboutMe}
+                isVisibleContact = {isVisibleContact}
                 hideProyect ={hideProyect}
                 visibleproyect={visibleproyect}
                 hideContact = {hideContact}

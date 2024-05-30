@@ -66,7 +66,7 @@ const Home = () =>{
             { texture: colorTextureMercury, radio: 2 , rotationSpeed: 360 / 14080 , afelio: 69	, perihelio: 46, texto: "Proyectos"},
             { texture: colorTextureVenus, radio: 6 , rotationSpeed: 360 / 58320, afelio:108 , perihelio: 107},
             { texture: colorTextureMarte, radio: 3, rotationSpeed: 360 / 250 , afelio: 249 , perihelio: 206},
-            { texture: colorTextureJupiter, radio: 12, rotationSpeed: 360 / 100 , afelio: 516, perihelio: 440},
+            { texture: colorTextureJupiter, radio: 12, rotationSpeed: 360 / 100 , afelio: 516, perihelio: 440, texto: "Creditos"},
             { texture: colorTextureSaturno, radio: 10, rotationSpeed: 360 / 110, afelio: 590	, perihelio: 550},
             { texture: colorTextureUrano, radio: 9,  rotationSpeed: 360 / 170, afelio: 700	, perihelio: 630 },
             { texture: colorTextureNeptuno, radio: 8,rotationSpeed: 360 / 160, afelio: 900 , perihelio: 780 },
@@ -225,10 +225,7 @@ const Home = () =>{
         )}
         
 
-        <div className='creditos'>
-            &quot;Astronauta&quot; (https://skfb.ly/6GBvp) by Mora is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/). <br />
-            &quot;Nave Espacial/Spacecraft&quot; (https://skfb.ly/6wCFG) by MatiasG729 is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
-        </div>
+        
     </>
 }
 

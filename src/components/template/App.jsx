@@ -4,7 +4,7 @@ function App() {
 
   return (
     <>
-      <div>
+      <div className="custom-cursor">
         <Outlet></Outlet>
       </div>
     </>

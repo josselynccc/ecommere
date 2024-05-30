@@ -1,7 +1,8 @@
 import {Mesh,SphereGeometry, MeshStandardMaterial, Group} from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import curriculum from '../assets/Letras/curriculum.glb';
-import proyectos from '../assets/Letras/PROYECTOS.glb'
+import proyectos from '../assets/Letras/PROYECTOS.glb';
+import creditos from '../assets/Letras/CREDITOS.glb'
 
 export const CreatePlanet = (scene, textura, radio, alphaMapTexture, texto) => {
     
@@ -29,6 +30,10 @@ export const CreatePlanet = (scene, textura, radio, alphaMapTexture, texto) => {
         
             case 'Proyectos':
                 ruta = proyectos
+                break;
+            
+            case 'Creditos':
+                ruta = creditos
                 break;
         }
 

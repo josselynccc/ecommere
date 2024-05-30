@@ -48,9 +48,9 @@ const Logo = ({hideAboutMe,hideProyect,hideContact}) =>{
         
     <div className='containerlogo' style={{right: 0}}>
         <img className='logo' onClick={()=>{
-                hideAboutMe()
-                hideProyect()
-                hideContact()
+                hideAboutMe();
+                hideProyect();
+                hideContact();
             }} src={logo} alt=""/>
     </div>
         
